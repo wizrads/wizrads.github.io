@@ -23,7 +23,7 @@ repository               : "wizrads/wizrads.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "profile.jpg"
   name             : "Joey Schulz"
   pronouns         : # example: "she/her"  
   bio              : "Medical Physics PhD candidate working on treatment planning optimization, HDR brachytherapy, and FLASH radiotherapy."

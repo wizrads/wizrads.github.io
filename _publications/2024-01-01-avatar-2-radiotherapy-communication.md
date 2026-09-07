@@ -4,6 +4,8 @@ collection: publications
 category: manuscripts
 permalink: /publication/2024-01-01-avatar-2-radiotherapy-communication
 excerpt: 'A radio-transparent audio-visual system for anesthesia avoidance during radiotherapy, since licensed to Leo Cancer Care.'
+header:
+  teaser: 'publications/avatar-fig1.jpg'
 date: 2024-01-01
 venue: 'Frontiers in Oncology'
 paperurl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11493730/'
@@ -11,5 +13,8 @@ citation: 'JB Schulz, L Zalavari, PM Gutkin, A Jiang, YP Wang, C Gibson, A Garza
 ---
 
 A radio-transparent audio-visual system for anesthesia avoidance during radiotherapy, since licensed to Leo Cancer Care.
+
+![Figure 1](/images/publications/avatar-fig1.jpg)
+*Figure 1: AVATAR configurations, from the original tablet-and-projector setup to the advanced AV box driving video, biofeedback, and immersion. Reproduced from the open-access article under CC BY.*
 
 [Read the paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11493730/)

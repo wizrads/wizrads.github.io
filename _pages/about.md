@@ -16,7 +16,7 @@ More recently, my research has focused on optimization methods for HDR brachythe
 ## Current research
 
 - **HDR brachytherapy optimization** — integrated catheter position and dwell-time optimization for focal dose escalation in prostate HDR, and a robust formulation that folds catheter selection and dwell-time optimization into a single inverse-planning framework.
-- **Differentiable dose calculation** — implicit neural representations (INRs) that replace discrete pre-computed dose kernels with continuous, differentiable models trained in PyTorch, accelerating gradient-based optimization through autodiff.
+- **Implicit neural representations (INRs)** — the subject of my upcoming ASTRO 2026 Quick Pitch talk on directional brachytherapy optimization.
 - **FLASH radiotherapy** — an open-source preclinical FLASH treatment planning system and [Collimator Creator](https://github.com/wizrads/CollimatorCreator), plus the software-based conversion of a clinical Varian TrueBeam to FLASH mode.
 - **Machine learning for clinical workflows** — LLM-assisted analysis of linac downtime, deep-learning autosegmentation for preclinical radiopharmaceutical therapy dosimetry, and foundation segmentation models for markerless patient positioning.
 
