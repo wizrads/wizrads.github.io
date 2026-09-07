@@ -19,7 +19,10 @@ main:
     
   - title: "Portfolio"
     url: /portfolio/
-        
+
+  - title: "Projects"
+    url: /projects/
+
   # Hidden from the header for now. The page itself still builds and is
   # reachable at /cv/ - uncomment to put the tab back.
   # - title: "CV"
