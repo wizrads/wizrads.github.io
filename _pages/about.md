@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am a Medical Physics PhD candidate at the University of Wisconsin–Madison, working in [Bryan Bednarz's](https://www.medphysics.wisc.edu/) group on radiation therapy treatment planning, HDR brachytherapy, FLASH radiotherapy, clinical workflow automation, and translational research. My work focuses on developing practical systems that can move from research concepts into clinical use.
+I am a Medical Physics PhD candidate at the University of Wisconsin–Madison, working in [Bryan Bednarz's Radiological Engineering and Design Laboratory](https://redlab.wiscweb.wisc.edu/) on radiation therapy treatment planning, HDR brachytherapy, FLASH radiotherapy, clinical workflow automation, and translational research. I collaborate heavily with Jordan Slagowski, particularly on the brachytherapy optimization work. My work focuses on developing practical systems that can move from research concepts into clinical use.
 
 I have worked on patient-specific 3D-printed radiation therapy devices, including electron cutouts and photon blocks, automated treatment planning and QA workflows, virtual reality tools for patient education, and preclinical FLASH radiotherapy studies.
 
