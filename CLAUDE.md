@@ -49,6 +49,11 @@ docker compose up                           # containerized alternative (_config
 
 Editing `_config.yml` requires restarting Jekyll; Markdown/HTML changes hot-reload.
 
+Always preview with `jekyll serve`, never by serving `_site/` with another static server: `url` is
+`https://joeyschulz.com`, so a plain `jekyll build` bakes absolute production URLs into every asset link and the
+page will silently load the *live* CSS and JS instead of your local changes. `jekyll serve` rewrites `url` to the
+local address for the duration.
+
 JavaScript is committed pre-built. After touching anything under `assets/js/` (except `main.min.js`):
 
 ```bash

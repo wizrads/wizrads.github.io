@@ -10,7 +10,7 @@
   float: left;
   margin-left: 0;
   margin-right: 0;
-  margin-top: 3em;
+  margin-top: 1.5em;
   width: 100%;
   clear: both;
 
@@ -21,19 +21,24 @@
   position: fixed;
   bottom: 0;
 
-  -webkit-animation: intro 0.3s both;
-          animation: intro 0.3s both;
-  -webkit-animation-delay: 0.45s;
-          animation-delay: 0.45s;
   border-top: 1px solid var(--global-dark-border-color);
 
   footer {
-    @include clearfix;
+    /* no clearfix here: its ::before/::after pseudo-elements become flex
+       items and force the copyright onto its own row */
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1em;
+    margin-top: 0;
     max-width: 100%;
-    padding: 0 1em 1em;
+    padding: 0.35em 1em 0.45em;
+
+    /* sit the follow links and the copyright on one row so the bar stays short */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: 1.5em;
+    row-gap: 0.15em;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
@@ -68,6 +73,16 @@
 .page__footer-copyright {
   font-family: $global-font-family;
   font-size: $type-size-7;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* stack the two halves once they no longer fit side by side */
+@media screen and (max-width: 768px) {
+  .page__footer footer {
+    display: block;
+    text-align: center;
+  }
 }
 
 .page__footer-follow {
@@ -79,10 +94,10 @@
 
   li {
     display: inline-block;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 0;
+    padding-bottom: 0;
     font-family: $sans-serif-narrow;
-    font-size: $type-size-6;
+    font-size: $type-size-7;
     text-transform: uppercase;
   }
 
@@ -92,7 +107,7 @@
   }
 
   a {
-    padding-right: 10px;
+    padding-right: 8px;
     font-weight: bold;
   }
 
