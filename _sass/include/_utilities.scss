@@ -193,6 +193,20 @@ body:hover .visually-hidden button {
   margin-right: 0.5em;
 }
 
+/* Font Awesome and Academicons are fetched with rel="preload" and only become
+   stylesheets after first paint, so until they land these <i> elements have no
+   width and every row's text sits too far left, then jumps sideways. Reserve
+   the same box .fa-fw / .ai-fw use so nothing moves. */
+.author__urls i,
+.author__urls .ai,
+.social-icons i,
+.social-icons .ai {
+  display: inline-block;
+  width: 1.25em;
+  text-align: center;
+  font-style: normal;
+}
+
 /* social icons*/
 
 .social-icons {
