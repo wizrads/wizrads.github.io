@@ -151,12 +151,15 @@ by accident.
 - **`_sass/layout/_footer.scss` + `_includes/footer.html`** — the footer is one compact flex row (~46px, was ~93px).
   The `@include clearfix` was removed from that rule deliberately: its `::before`/`::after` pseudo-elements become
   flex items and force the copyright onto its own line.
-- **`_sass/layout/{_masthead,_navigation,_page,_footer}.scss`, `_sass/layout/_base.scss`** — the staggered `intro`
-  opacity animation and its keyframes were deleted. It replayed a ~0.75s fade-in cascade on every page load, which
-  made ordinary navigation look like a full reload and the sidebar look like it was rebuilding itself.
+Navigation is a plain full page load. Hover-prefetching (instant.page) was added and then **deliberately reverted**
+at Joey's request — do not reintroduce it or a client-side router without asking.
 
-Navigation is a plain full page load. Hover-prefetching (instant.page) was added and then **deliberately reverted** at
-Joey's request — do not reintroduce it or a client-side router without asking.
+The staggered `intro` fade-in (masthead 0.15s, `#main` 0.35s, footer 0.45s) is upstream behaviour and is **kept**.
+It was briefly deleted on the theory that it was what made navigation feel like a reload; that was wrong. The fade is
+what makes the upstream demo look smooth, and the computed animations here now match
+https://academicpages.github.io exactly. What actually looked broken was three real bugs firing underneath it — the
+masthead padding jump, the flashing nav button, and the shifting sidebar icons, all fixed above. Do not remove the
+fade to "speed up" navigation.
 
 ## Upstream template leftovers
 
