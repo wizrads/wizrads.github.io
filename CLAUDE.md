@@ -56,7 +56,7 @@ uses `master`, so it never actually runs. Verify builds locally.
 
 All template placeholder content is gone. `_config.yml`, `_pages/about.md`, `_pages/cv.md`, and the `_publications`
 (17), `_talks` (28), `_teaching` (2), and `_portfolio` (4) collections hold real content generated from Joey's CV.
-`_posts/` is empty and there is no blog.
+`_posts/` is empty and there is no blog. The nav is Publications / Talks / Teaching / Portfolio / Projects.
 
 **Dates are year-accurate only.** The CV supplies publication and meeting years but not days, so every generated file
 uses `YYYY-01-01`. Never present those days as real.
@@ -77,6 +77,31 @@ expect their own TSV/BibTeX inputs.
 also set as `header.teaser` in front matter. Only **3 of 17** are done (the three Frontiers papers, which are CC BY).
 The rest are blocked on two things: the paywalled journals do not make figures retrievable, and *which* figure counts
 as the main one is Joey's editorial call, not a guess to make. Ask him for the files.
+
+### Projects (self-hosted demos)
+
+Proof-of-concept apps are served from this same repo and domain. The layout is deliberate:
+
+- `_pages/projects.md` owns the `/projects/` permalink and is the styled listing page, in the site's own layout.
+- Each demo is a plain static folder, `projects/<slug>/index.html`, served at `/projects/<slug>/` with no site chrome.
+
+**Never put an `index.html` at `projects/` root** — it and `_pages/projects.md` would both write
+`_site/projects/index.html` and one silently wins. Add a demo by dropping in `projects/<new-slug>/` and adding a
+section to the listing page.
+
+Static files with **no YAML front matter are copied byte-for-byte** and never run through Liquid, which is what makes
+dropping a prebuilt app in here safe. A file that *does* have front matter, or any `{{` / `{%` in a template or JS
+library, will be mangled — check with `grep -c '{{\|{%'` before adding one.
+
+House rule for these demos, applied to the first one: **no external requests.** Bundle libraries inline and strip
+web-font links (the alumni app had three Google Fonts tags removed and its stack re-led with `system-ui`). Verify
+with `performance.getEntriesByType('resource').filter(r => !r.name.startsWith(location.origin))` — it should be
+empty. Remember GitHub Pages is static-only, and anything here is public, so no secrets or API keys ever.
+
+Current demo: `projects/uw-madison-alumni-network/` — a D3 map of UW–Madison Medical Physics graduates 2019–2026.
+Its roster is embedded in the page and its "Load roster CSV" control reads a local file in the browser only; the CSV
+is **deliberately not shipped**. Its "First destination" panel reports categories only and does not publish
+employers — keep it that way if the data is ever extended.
 
 ### Hidden pages
 
