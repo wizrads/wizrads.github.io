@@ -52,6 +52,13 @@ to the local address for the duration.
 There is no test suite. CI is `.github/workflows/jekyll-build.yml`, but it triggers on branch `main` while this repo
 uses `master`, so it never actually runs. Verify builds locally.
 
+**A green local build does not guarantee a green Pages build.** GitHub Pages force-enables
+`jekyll-optional-front-matter`, which turns *every* front-matter-less `.md` file in the repo into a page and runs it
+through Liquid — local Jekyll does not, and copies those files verbatim. `CLAUDE.md` quotes `{{` and `{%`, so Pages
+choked on it and the deploy failed while `jekyll build` stayed clean; it is now in `exclude:` in `_config.yml`. Any
+new Markdown at the repo root needs front matter, an `exclude:` entry, or no Liquid braces. If a push does not show
+up on the live site, check `gh run list --repo wizrads/wizrads.github.io`, not just the build status.
+
 ## Content
 
 All template placeholder content is gone. `_config.yml`, `_pages/about.md`, `_pages/cv.md`, and the `_publications`
