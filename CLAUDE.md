@@ -14,9 +14,20 @@ drop the domain on the next deploy.
 Pages is configured as "Deploy from a branch": **`master`, `/ (root)`**, built by GitHub's own `pages build and
 deployment` workflow. `master` is the default branch, so pushing to it publishes.
 
-Much of the tree is still unmodified upstream template content (placeholder posts, talks, publications, teaching,
-portfolio, and `_pages/markdown.md`/`terms.md` docs pages). When personalizing, edit or delete those files rather
-than adding parallel ones.
+**Workflow: commit and push straight to `master`.** No feature branches, no pull requests — this is a single-author
+personal site and `master` is the deploy branch, so a PR only delays the change going live. Verify the build first
+(`bundle exec jekyll build --strict_front_matter`), then commit and `git push origin master`; the Pages deploy takes
+roughly a minute, after which the change can be confirmed against https://joeyschulz.com.
+
+Site-wide identity (`_config.yml` title/description and the whole `author:` sidebar block) is filled in. The
+*content* is still unmodified upstream template material — the placeholder files in `_posts`, `_talks`,
+`_publications`, `_teaching`, and `_portfolio`, the homepage body in `_pages/about.md`, and the
+`_pages/markdown.md` / `terms.md` docs pages. When personalizing, edit or delete those files rather than adding
+parallel ones.
+
+Source material for the real content lives outside the repo: Joey's CV (publications with DOIs, grants, awards,
+teaching) and his Google Scholar profile. `markdown_generator/` exists to turn that kind of tabular/BibTeX data into
+`_publications/` and `_talks/` entries.
 
 ## Commands
 
