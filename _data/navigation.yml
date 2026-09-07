@@ -20,8 +20,10 @@ main:
   - title: "Portfolio"
     url: /portfolio/
         
-  - title: "CV"
-    url: /cv/
+  # Hidden from the header for now. The page itself still builds and is
+  # reachable at /cv/ - uncomment to put the tab back.
+  # - title: "CV"
+  #   url: /cv/
     
   # - title: "CV"
   #   url: /cv-json/
