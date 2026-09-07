@@ -15,7 +15,14 @@ body {
   background-color: var(--global-bg-color);
 
   margin: 0;
-  padding: $masthead-height 0 0;
+  /* Reserve exactly what the fixed masthead occupies, so the JS in
+     jquery.greedy-navigation.js does not have to correct it after first
+     paint (which showed up as the page jumping by a few pixels). Below
+     $medium the links collapse into the menu button and it is shorter. */
+  padding: $masthead-height-narrow 0 0;
+  @include breakpoint($medium) {
+    padding-top: $masthead-height;
+  }
   padding-bottom: 9em;
   font-family: $global-font-family;
   line-height: 1.5;

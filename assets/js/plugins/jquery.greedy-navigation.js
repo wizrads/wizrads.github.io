@@ -58,9 +58,14 @@ function updateNav() {
   // Keep counter updated
   $btn.attr("count", breaks.length);
 
-  // update masthead height and the body/sidebar top padding
+  // update masthead height and the body/sidebar top padding.
+  // The stylesheet already reserves the expected height, so only touch the
+  // padding when the measurement actually disagrees - otherwise every page
+  // load rewrote it and the page visibly shifted after first paint.
   var mastheadHeight = $('.masthead').height();
-  $('body').css('padding-top', mastheadHeight + 'px');
+  if (Math.abs(parseFloat($('body').css('padding-top')) - mastheadHeight) > 2) {
+    $('body').css('padding-top', mastheadHeight + 'px');
+  }
   if ($(".author__urls-wrapper button").is(":visible")) {
     $(".sidebar").css("padding-top", "");
   } else {

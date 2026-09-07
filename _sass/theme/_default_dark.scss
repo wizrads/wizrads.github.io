@@ -28,7 +28,8 @@ $warning-color              : #f89406;
 $border-radius              : 4px;
 $box-shadow                 : 0 1px 1px rgba(0, 0, 0, 0.125);
 $global-transition          : all 0.2s ease-in-out;
-$masthead-height            : 70px;
+$masthead-height            : 65px;  // measured height of the one-line nav; keep in sync or the page shifts on load
+$masthead-height-narrow     : 58px;  // below $medium: single row plus the menu button
 $navicon-width              : 28px;
 $navicon-height             : 4px;
 $sidebar-link-max-width     : 250px;
