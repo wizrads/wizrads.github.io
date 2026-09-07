@@ -62,11 +62,6 @@ npm install && npm run build:js             # uglifies jquery + greedy-nav + _ma
 
 Commit the regenerated `assets/js/main.min.js` — that bundle is what the site loads.
 
-`assets/js/instantpage.min.js` (instant.page 5.2.0, MIT) sits alongside it and is **not** part of that bundle: it is
-vendored verbatim, loaded as its own module from `_includes/scripts.html`, and must not be fed through
-`npm run build:js`. It prefetches a link on hover so the page is cached before the click lands. To update it, replace
-the file from cdnjs.
-
 There is no test suite. CI is `.github/workflows/jekyll-build.yml` (a strict-front-matter build); note it triggers on
 branch `main`, not this repo's `master`, so it does not actually gate pushes here.
 
