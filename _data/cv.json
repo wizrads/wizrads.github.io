@@ -1,14 +1,14 @@
 {
   "basics": {
-    "name": "Your Sidebar Name",
-    "email": "none@example.org",
+    "name": "Joey Schulz",
+    "email": "joey.schulz@wisc.edu",
     "phone": "",
-    "website": "https://academicpages.github.io",
-    "summary": "Currently employed at Red Brick University. Short biography for the left-hand sidebar",
+    "website": "https://joeyschulz.com",
+    "summary": "Currently employed at UW\u2013Madison. Medical Physics PhD candidate working on treatment planning optimization, HDR brachytherapy, and FLASH radiotherapy.",
     "location": {
       "address": "",
       "postalCode": "",
-      "city": "Earth",
+      "city": "Madison, WI",
       "countryCode": "US",
       "region": ""
     },
@@ -16,137 +16,389 @@
       {
         "network": "Google Scholar",
         "username": "",
-        "url": "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
-      },
-      {
-        "network": "ORCID",
-        "username": "",
-        "url": "https://orcid.org/yourorcidurl"
+        "url": "https://scholar.google.com/citations?user=EK1HF2oAAAAJ&hl=en"
       },
       {
         "network": "GitHub",
-        "username": "academicpages",
-        "url": "https://github.com/academicpages"
+        "username": "wizrads",
+        "url": "https://github.com/wizrads"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "joseph-schulz",
+        "url": "https://www.linkedin.com/in/joseph-schulz"
       }
     ]
   },
   "work": [],
-  "education": [
-    {
-      "institution": "GitHub University",
-      "area": "Ph.D in Version Control Theory",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2018",
-      "gpa": null,
-      "courses": []
-    },
-    {
-      "institution": "GitHub University",
-      "area": "M.S. in Jekyll",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2014",
-      "gpa": null,
-      "courses": []
-    },
-    {
-      "institution": "GitHub University",
-      "area": "B.S. in GitHub",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2012",
-      "gpa": null,
-      "courses": []
-    }
-  ],
+  "education": [],
   "skills": [],
   "languages": [],
   "interests": [],
   "references": [],
   "publications": [
     {
-      "name": "Paper Title Number 1",
-      "publisher": "Journal 1",
-      "releaseDate": "2009-10-01",
-      "website": "https://academicpages.github.io/files/paper1.pdf",
-      "summary": "This paper is about the number 1. The number 2 is left for future work."
+      "name": "Shaping success: clinical implementation of a 3D-printed electron cutout program in external beam radiation therapy",
+      "publisher": "Frontiers in Oncology",
+      "releaseDate": "2023-01-01",
+      "website": "https://doi.org/10.3389/fonc.2023.1237037",
+      "summary": "End-to-end clinical implementation of patient-specific 3D-printed electron cutouts, from print workflow to QA."
     },
     {
-      "name": "Paper Title Number 2",
-      "publisher": "Journal 1",
-      "releaseDate": "2010-10-01",
-      "website": "https://academicpages.github.io/files/paper2.pdf",
-      "summary": "This paper is about the number 2. The number 3 is left for future work."
+      "name": "An affordable platform for virtual reality-based patient education in radiation therapy",
+      "publisher": "Practical Radiation Oncology",
+      "releaseDate": "2023-01-01",
+      "website": "https://doi.org/10.1016/j.prro.2023.06.008",
+      "summary": "A low-cost VR platform for patient education in radiation therapy; recognized with the AAPM Arthur Boyer Award."
     },
     {
-      "name": "Paper Title Number 3",
-      "publisher": "Journal 1",
-      "releaseDate": "2015-10-01",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about the number 3. The number 4 is left for future work."
+      "name": "Learning image representations for content-based image retrieval of radiotherapy treatment plans",
+      "publisher": "Physics in Medicine & Biology",
+      "releaseDate": "2023-01-01",
+      "website": "https://doi.org/10.1088/1361-6560/accdb0",
+      "summary": "Learned image representations for retrieving similar prior treatment plans from a clinical database."
     },
     {
-      "name": "Paper Title Number 4",
-      "publisher": "GitHub Journal of Bugs",
-      "releaseDate": "2024-02-17",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about fixing template issue #693."
+      "name": "Tungsten filled 3D printed lung blocks for total body irradiation",
+      "publisher": "Practical Radiation Oncology",
+      "releaseDate": "2023-01-01",
+      "website": "https://doi.org/10.1016/j.prro.2023.11.003",
+      "summary": "Tungsten-filled 3D printed lung blocks for total body irradiation, validated across institutions."
+    },
+    {
+      "name": "AVATAR 2.0: next level communication systems for radiotherapy through face-to-face video, biofeedback, translation, and audiovisual immersion",
+      "publisher": "Frontiers in Oncology",
+      "releaseDate": "2024-01-01",
+      "website": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11493730/",
+      "summary": "A radio-transparent audio-visual system for anesthesia avoidance during radiotherapy, since licensed to Leo Cancer Care."
+    },
+    {
+      "name": "Multi-institutional audit of FLASH and conventional dosimetry with a 3D-printed anatomically realistic mouse phantom",
+      "publisher": "International Journal of Radiation Oncology*Biology*Physics",
+      "releaseDate": "2024-01-01",
+      "website": "https://www.sciencedirect.com/science/article/pii/S0360301624004334",
+      "summary": "A cross-institution dosimetry audit for FLASH and conventional delivery using a 3D-printed anatomically realistic mouse phantom."
+    },
+    {
+      "name": "A clinical solution for non-toxic 3D-printed photon blocks in external beam radiation therapy",
+      "publisher": "Journal of Applied Clinical Medical Physics",
+      "releaseDate": "2024-01-01",
+      "website": "https://doi.org/10.1002/acm2.14225",
+      "summary": "A non-toxic, tungsten-filled alternative to Cerrobend photon blocks, taken through to clinical implementation."
+    },
+    {
+      "name": "Fully customizable bronze-PLA lung shields using 3D printing for total body irradiation (TBI)",
+      "publisher": "Biomedical Physics & Engineering Express",
+      "releaseDate": "2025-01-01",
+      "website": "https://doi.org/10.1088/2057-1976/add898",
+      "summary": "Patient-specific bronze-PLA lung shields for total body irradiation, printable in-house."
+    },
+    {
+      "name": "The feasibility of a patient oriented interactive panoramic virtual tour for external beam radiation therapy",
+      "publisher": "Frontiers in Oncology",
+      "releaseDate": "2025-01-01",
+      "website": "https://doi.org/10.3389/fonc.2025.1568405",
+      "summary": "An interactive panoramic virtual tour built to orient patients to the radiation oncology department before treatment."
+    },
+    {
+      "name": "Linear accelerator (linac) downtime analysis assisted with a Large Language Model (LLM)",
+      "publisher": "Journal of Applied Clinical Medical Physics",
+      "releaseDate": "2025-01-01",
+      "website": "https://doi.org/10.1002/acm2.70400",
+      "summary": "LLM-assisted extraction and classification of linac downtime events from clinical operations records."
+    },
+    {
+      "name": "Nontoxic generalized patient shielding devices for total skin electron therapy",
+      "publisher": "Physics and Imaging in Radiation Oncology",
+      "releaseDate": "2025-01-01",
+      "website": "https://www.sciencedirect.com/science/article/pii/S2405631625000028",
+      "summary": "Generalized, non-toxic shielding devices for total skin electron therapy, replacing lead-based alternatives."
+    },
+    {
+      "name": "Non-invasive reversible software-based configuration of a clinically used linear accelerator for preclinical electron FLASH radiobiology",
+      "publisher": "arXiv (accepted, International Journal of Radiation Oncology*Biology*Physics)",
+      "releaseDate": "2025-01-01",
+      "website": "https://arxiv.org/abs/2509.17370",
+      "summary": "A reversible, software-only conversion of a clinical linac for preclinical electron FLASH work, with no hardware modification."
+    },
+    {
+      "name": "Treat-through OLED displays: dosimetry and performance of OLED AVATAR screens for megavoltage radiotherapy",
+      "publisher": "arXiv (under review, Journal of Applied Clinical Medical Physics)",
+      "releaseDate": "2025-01-01",
+      "website": "https://arxiv.org/abs/2511.00331",
+      "summary": "Dosimetric characterization of OLED screens left in the beam path during megavoltage treatment."
+    },
+    {
+      "name": "Deep learning auto-contouring of target and organs-at-risk on post-catheter implant CT images for prostate HDR brachytherapy",
+      "publisher": "Journal of Applied Clinical Medical Physics",
+      "releaseDate": "2026-01-01",
+      "website": "https://doi.org/10.1002/acm2.70748",
+      "summary": "Auto-contouring of target and organs-at-risk on post-implant CT, where catheter artifacts complicate segmentation."
+    },
+    {
+      "name": "Emerging FLASH therapy platforms for stereotactic radiosurgery and body radiotherapy",
+      "publisher": "Journal of Radiosurgery and SBRT",
+      "releaseDate": "2026-01-01",
+      "website": "https://pubmed.ncbi.nlm.nih.gov/42004842/",
+      "summary": "Review of platforms bringing ultra-high dose rate delivery to stereotactic radiosurgery and body radiotherapy. \u2020Equal contribution."
+    },
+    {
+      "name": "Characterization and calibration of the iQID digital autoradiography system for direct quantitative imaging of beta-emitters in tissue samples",
+      "publisher": "bioRxiv (under review, Medical Physics)",
+      "releaseDate": "2026-01-01",
+      "website": "https://www.biorxiv.org/content/10.64898/2026.01.27.701920v1.abstract",
+      "summary": "Characterization and calibration of the iQID system for quantitative beta-emitter imaging in tissue."
+    },
+    {
+      "name": "Robust optimization of catheter positions and dwell times for HDR prostate brachytherapy",
+      "publisher": "Medical Physics",
+      "releaseDate": "2026-01-01",
+      "website": "https://doi.org/10.1002/mp.70640",
+      "summary": "Folds catheter position selection and dwell-time optimization into a single robust inverse-planning framework for prostate HDR brachytherapy."
     }
   ],
   "presentations": [
     {
-      "name": "Talk 1 on Relevant Topic in Your Field",
-      "event": "UC San Francisco, Department of Testing",
-      "date": "2012-03-01",
-      "location": "San Francisco, CA, USA",
+      "name": "OneIso: a streamlined HyperArc patient and machine QA for single-isocenter multi-target (SIMT) SRS",
+      "event": "AAPM Annual Meeting",
+      "date": "2022-01-01",
+      "location": "",
       "description": ""
     },
     {
-      "name": "Tutorial 1 on Relevant Topic in Your Field",
-      "event": "UC-Berkeley Institute for Testing Science",
-      "date": "2013-03-01",
-      "location": "Berkeley, CA, USA",
+      "name": "An affordable platform for virtual reality-based patient education in radiation therapy",
+      "event": "AAPM Annual Meeting",
+      "date": "2022-01-01",
+      "location": "",
       "description": ""
     },
     {
-      "name": "Talk 2 on Relevant Topic in Your Field",
-      "event": "London School of Testing",
-      "date": "2014-02-01",
-      "location": "London, UK",
+      "name": "An affordable platform for virtual reality-based patient education in radiation therapy",
+      "event": "AAPM Webinar",
+      "date": "2022-01-01",
+      "location": "",
       "description": ""
     },
     {
-      "name": "Conference Proceeding talk 3 on Relevant Topic in Your Field",
-      "event": "Testing Institute of America 2014 Annual Conference",
-      "date": "2014-03-01",
-      "location": "Los Angeles, CA, USA",
+      "name": "Analyzing the capability of 3D printed blocks for TBI and TLI therapies",
+      "event": "AAPM Annual Meeting",
+      "date": "2023-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Enhancing radiation therapy with 3D printed electron cutouts: a successful clinical implementation",
+      "event": "AAPM Annual Meeting",
+      "date": "2023-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "An interactive virtual reality tour for radiation oncology: a patient-centric approach",
+      "event": "AAPM Annual Meeting",
+      "date": "2023-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Closing the loop: toward sustainable 3D print recycling in the clinic",
+      "event": "ASTRO Annual Meeting",
+      "date": "2023-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "AVATAR 2.0: advanced radiolucent communication systems for next-level radiotherapy through face-to-face video, biofeedback, translation, and audio-visual immersion",
+      "event": "AAPM 66th Annual Meeting & Exhibition",
+      "date": "2024-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "A reusable, non-toxic, custom compensator stacking system for total body irradiation",
+      "event": "AAPM 66th Annual Meeting & Exhibition",
+      "date": "2024-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Multi-institutional dosimetry protocol to standardize dosimetry across two research facilities for preclinical radiobiological experiments",
+      "event": "AAPM 66th Annual Meeting & Exhibition",
+      "date": "2024-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Applying a portable pocket handheld ultrasound scanner to monitor tumor volume in preclinical studies",
+      "event": "ASTRO Annual Meeting",
+      "date": "2024-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Monte Carlo based treatment planning workflow for pre-clinical and clinical electron FLASH studies",
+      "event": "ASTRO Annual Meeting",
+      "date": "2024-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Multi-institutional standardized dosimetry protocol for preclinical radiobiological experiments",
+      "event": "ASTRO Annual Meeting",
+      "date": "2024-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "3D printed bolus in SGRT",
+      "event": "SGRT US Annual Meeting",
+      "date": "2024-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Two's company, three's a crowd? A Bayesian approach to optimizing the number of measurement readings in radiation therapy QA",
+      "event": "AAPM 67th Annual Meeting & Exhibition",
+      "date": "2025-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Integrated catheter position and dwell time optimization for focal dose escalation in prostate HDR brachytherapy",
+      "event": "AAPM 67th Annual Meeting & Exhibition",
+      "date": "2025-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Automated parametric custom collimator creation for preclinical irradiation studies",
+      "event": "AAPM 67th Annual Meeting & Exhibition",
+      "date": "2025-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Slit scanning delivery simulation for FLASH radiotherapy",
+      "event": "AAPM 67th Annual Meeting & Exhibition",
+      "date": "2025-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Novel method for robust catheter insertion in HDR prostate brachytherapy",
+      "event": "ASTRO Annual Meeting",
+      "date": "2025-01-01",
+      "location": "",
+      "description": ""
+    },
+    {
+      "name": "Tumor dose heterogeneity informed biological optimization of combination Lu-177 PSMA radiopharmaceutical therapy and Ir-192 high dose rate prostate brachytherapy",
+      "event": "AAPM 68th Annual Meeting & Exhibition",
+      "date": "2026-01-01",
+      "location": "Vancouver, BC, Canada",
+      "description": ""
+    },
+    {
+      "name": "End-to-end verification of an open-source preclinical electron FLASH treatment planning system",
+      "event": "AAPM 68th Annual Meeting & Exhibition",
+      "date": "2026-01-01",
+      "location": "Vancouver, BC, Canada",
+      "description": ""
+    },
+    {
+      "name": "Large Language Model (LLM) based linac downtime analysis",
+      "event": "AAPM 68th Annual Meeting & Exhibition",
+      "date": "2026-01-01",
+      "location": "Vancouver, BC, Canada",
+      "description": ""
+    },
+    {
+      "name": "Validation of MR-CT deformable registration accuracy and MRI fat-fraction quantification using a novel 3D-printed anthropomorphic phantom",
+      "event": "AAPM 68th Annual Meeting & Exhibition",
+      "date": "2026-01-01",
+      "location": "Vancouver, BC, Canada",
+      "description": ""
+    },
+    {
+      "name": "Autosegmentation via nnU-Net on post-brachytherapy-catheter CT for prostate HDR brachytherapy",
+      "event": "AAPM 68th Annual Meeting & Exhibition",
+      "date": "2026-01-01",
+      "location": "Vancouver, BC, Canada",
+      "description": ""
+    },
+    {
+      "name": "Design and fabrication of a novel pelvic-vertebral 3D-printed anthropomorphic phantom for radiopharmaceutical therapy dosimetry",
+      "event": "AAPM 68th Annual Meeting & Exhibition",
+      "date": "2026-01-01",
+      "location": "Vancouver, BC, Canada",
+      "description": ""
+    },
+    {
+      "name": "Robust simultaneous optimization of catheter positions and dwell times for high dose rate prostate brachytherapy",
+      "event": "AAPM 68th Annual Meeting & Exhibition",
+      "date": "2026-01-01",
+      "location": "Vancouver, BC, Canada",
+      "description": ""
+    },
+    {
+      "name": "Non-invasive reversible software-based configuration of a clinically used linear accelerator for preclinical electron FLASH radiobiology",
+      "event": "AAPM 68th Annual Meeting & Exhibition",
+      "date": "2026-01-01",
+      "location": "Vancouver, BC, Canada",
+      "description": ""
+    },
+    {
+      "name": "Simultaneous source position and continuous shield orientation optimization for directional brachytherapy via neural implicit dose kernels",
+      "event": "ASTRO 68th Annual Meeting",
+      "date": "2026-01-01",
+      "location": "",
       "description": ""
     }
   ],
   "teaching": [
     {
-      "course": "Teaching experience 1",
-      "institution": "University 1, Department",
-      "date": "2014-01-01",
-      "role": "Undergraduate course",
+      "course": "MP 566: Radiation Therapy Physics",
+      "institution": "University of Wisconsin\u2013Madison, Department of Medical Physics",
+      "date": "2026-01-01",
+      "role": "Teaching assistant",
       "description": ""
     },
     {
-      "course": "Teaching experience 2",
-      "institution": "University 1, Department",
-      "date": "2015-01-01",
-      "role": "Workshop",
+      "course": "MP 668: Radiotherapy Rad Lab",
+      "institution": "University of Wisconsin\u2013Madison, Department of Medical Physics",
+      "date": "2026-01-01",
+      "role": "Course co-creator and teaching assistant",
       "description": ""
     }
   ],
   "portfolio": [
     {
-      "name": "Portfolio item number 1",
+      "name": "Patient-specific 3D-printed devices",
       "category": "portfolio",
       "date": "",
       "url": "",
-      "description": "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+      "description": "Electron cutouts, photon blocks, and shielding taken from prototype to clinic."
+    },
+    {
+      "name": "AVATAR",
+      "category": "portfolio",
+      "date": "",
+      "url": "",
+      "description": "Radio-transparent audio-visual systems for anesthesia avoidance during radiotherapy."
+    },
+    {
+      "name": "Collimator Creator",
+      "category": "portfolio",
+      "date": "",
+      "url": "",
+      "description": "Parametric collimator design for preclinical linac-based irradiation studies."
+    },
+    {
+      "name": "Preclinical FLASH Treatment Planning System",
+      "category": "portfolio",
+      "date": "",
+      "url": "",
+      "description": "Open-source TPS for preclinical electron FLASH radiotherapy."
     }
   ]
 }

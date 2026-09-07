@@ -28,7 +28,7 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "Medical Physics PhD candidate working on treatment planning optimization, HDR brachytherapy, and FLASH radiotherapy."
   location         : "Madison, WI"
-  employer         : "University of Wisconsin–Madison"
+  employer         : "UW–Madison"
   uri              : # URL
   email            : "joey.schulz@wisc.edu"
 
@@ -84,12 +84,10 @@ author:
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
-  books:
-    title: 'Books'
   manuscripts:
-    title: 'Journal Articles'    
-  conferences:
-    title: 'Conference Papers'
+    title: 'Peer-Reviewed Journal Articles'
+  preprints:
+    title: 'Preprints & Manuscripts Under Review'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews
