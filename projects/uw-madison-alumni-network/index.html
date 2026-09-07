@@ -114,6 +114,7 @@ const yearWrap = document.getElementById("yearWrap");
 
 let DATA, nodes = [], links = [], byLabel, scales, colorBy, sim, node, link, region, neighbors;
 let view = d3.zoomIdentity, motionOn = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let userZoomed = false;
 
 const color = n => scales[colorBy].get(n[colorBy]) || NEUTRAL;
 
@@ -281,7 +282,11 @@ function init(data){
   renderPlacement();
   recolor();
   nodes.forEach(n => { if (n.tx != null){ n.x = n.tx; n.y = n.ty; n.vx = n.vy = 0; } });
-  setTimeout(() => { setMotion(); fit(); }, 3200);
+  // Frame it before the first paint: node coordinates are centred on (0,0), which is the
+  // top-left corner of the SVG, so without this the graph hangs off-screen until a fit lands.
+  userZoomed = false;
+  fit(false);
+  setTimeout(() => { setMotion(); settleFit(); }, 3200);
 }
 
 /* ---------- territories ---------- */
@@ -518,9 +523,9 @@ function applyLayout(){
   }
   linkForce.initialize(nodes, Math.random);
   sim.alpha(.8).restart();
-  setTimeout(fit, 2600);
+  setTimeout(settleFit, 2600);
 }
-layoutSel.addEventListener("change", applyLayout);
+layoutSel.addEventListener("change", () => { userZoomed = false; applyLayout(); });
 
 /* ---------- territory wash ---------- */
 const bg = document.getElementById("bg"), bgCtx = bg.getContext("2d");
@@ -566,10 +571,11 @@ sizeCanvas();
 
 /* ---------- zoom ---------- */
 const zoom = d3.zoom().scaleExtent([.2,4]).on("zoom", e => {
+  if (e.sourceEvent) userZoomed = true;
   view=e.transform; root.attr("transform", e.transform); scheduleBg();
 });
 svg.call(zoom);
-function fit(){
+function fit(animate = true){
   const r=svg.node().getBoundingClientRect();
   const xs=nodes.map(n=>n.x), ys=nodes.map(n=>n.y);
   if(!xs.length||!isFinite(xs[0])) return;
@@ -578,9 +584,12 @@ function fit(){
   const inset = r.width > 820 ? 252 : 0;
   const availW = Math.max(200, r.width - inset);
   const k=Math.min(availW/(x1-x0), r.height/(y1-y0), 1.5);
-  svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity
-    .translate(inset + availW/2, r.height/2).scale(k).translate(-(x0+x1)/2,-(y0+y1)/2));
+  const t = d3.zoomIdentity
+    .translate(inset + availW/2, r.height/2).scale(k).translate(-(x0+x1)/2,-(y0+y1)/2);
+  (animate ? svg.transition().duration(400) : svg).call(zoom.transform, t);
 }
+// The settling fits run on a timer; skip them once the reader has taken over the view.
+function settleFit(){ if (!userZoomed) fit(); }
 window.addEventListener("resize", () => { sizeCanvas(); drawBg(); fit(); });
 
 /* ---------- placement panel ---------- */
