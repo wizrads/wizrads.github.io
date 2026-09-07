@@ -9,3 +9,5 @@ AVATAR 2.0 provides face-to-face video, biofeedback, translation, and audio-visu
 I was a collaborator on this project, not its lead. I contributed to the software and workflow side and to the clinical translation of the system at Stanford, alongside the team that developed it.
 
 Clinically implemented at Stanford and [licensed to Leo Cancer Care](https://leocancercare.com/news-and-events/press-release/leo-cancer-care-licenses-stanford-medicine-designed-avatar-audio-visual-system-for-future-use-in-pediatric-radiotherapy-treatments/). Published in *Frontiers in Oncology* (2024).
+
+[Source on GitHub](https://github.com/wizrads/AVATAR)
