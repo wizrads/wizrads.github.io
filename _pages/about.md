@@ -22,6 +22,6 @@ More recently, my research has focused on optimization methods for HDR brachythe
 
 ## Background
 
-Before starting my PhD I spent nearly three years as a Medical Physicist Assistant at Stanford Health Care, supporting clinical physics across SRS, SBRT, IMRT, VMAT, SGRT, and IGRT, and building Python and C# (ESAPI) tools for treatment planning and QA. Several of those projects reached clinical implementation, including a 3D-printed electron cutout program, non-toxic 3D-printed photon blocks, and the AVATAR audio-visual system for anesthesia avoidance, which was later licensed to Leo Cancer Care.
+Before starting my PhD I spent nearly three years as a Medical Physicist Assistant at Stanford Health Care, supporting clinical physics across SRS, SBRT, IMRT, VMAT, SGRT, and IGRT, and building Python and C# (ESAPI) tools for treatment planning and QA. I collaborated on several team projects there that reached clinical implementation, including a 3D-printed electron cutout program, non-toxic 3D-printed photon blocks, and AVATAR 2.0, the audio-visual system for anesthesia avoidance that was later licensed to Leo Cancer Care.
 
 I hold a BS in Physics with a minor in Mathematics from Boston College.
