@@ -127,9 +127,18 @@ The homepage carries a joke switch that swaps its copy for a Gen Alpha translati
   untouched. The state persists in `localStorage.brainrot`.
 
 A block whose text is rewritten but whose key is left in place still renders fine — it just stops translating, so
-**editing the real copy can never break the page**. Keep the two in sync by hand. Nav labels are swapped in place,
-which means the greedy nav has to re-measure: `renderBrainrot()` triggers a `resize` for that reason. Only the
-homepage is translated, so the nav labels revert when you navigate away.
+**editing the real copy can never break the page**. Keep the two in sync by hand. Only the homepage is translated, so
+the nav labels revert when you navigate away.
+
+**The `nav:` translations have a width budget.** They are swapped in place, and a nav wide enough to wrap the site
+title grows the masthead past the `$masthead-height` the stylesheet reserves — the padding jump described below. Keep
+each translated label about as wide as the label it replaces (the emoji sit flush against the word for this reason:
+the space costs ~5px each) and check the total, which must stay under the plain nav's:
+`document.querySelector("#site-nav .visible-links").getBoundingClientRect().width`. `renderBrainrot()` then triggers
+a `resize` on the **next animation frame** so the greedy nav re-measures a settled layout; triggering it in the same
+frame reads a stale masthead height and leaves the body padding a few pixels off.
+
+Emoji are plain characters in the YAML, rendered by the system emoji font, so none of them costs a request.
 
 **Attribution still applies here.** The `background-stanford` translation keeps the "team projects I was part of"
 framing for the 3D-printed devices and AVATAR 2.0 (see **Content** above) — do not let a punchier rewrite turn those

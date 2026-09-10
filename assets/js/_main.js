@@ -184,8 +184,13 @@ function setupBrainrot() {
     swaps.forEach(function (swap) {
       swap.element.innerHTML = on ? swap.brainrot : swap.plain;
     });
-    /* The greedy nav caches the width of every label, so make it re-measure. */
-    $(window).trigger("resize");
+    /* The greedy nav caches the width of every label and the masthead reserves
+       a fixed height, so make it re-measure - but only once the new labels have
+       actually reflowed, or it reads a stale height and leaves the body padding
+       a few pixels off. */
+    window.requestAnimationFrame(function () {
+      $(window).trigger("resize");
+    });
   }
 
   toggle.addEventListener("change", function () {
