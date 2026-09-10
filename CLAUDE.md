@@ -156,7 +156,15 @@ every page and would otherwise keep the page one click away. Use the same patter
 fit, so its Education and Work sections come out empty. Either fix the script or delete the page — do not contort
 `cv.md` to satisfy the parser.
 
-Known gaps: no ORCID iD in the sidebar, no `files/cv.pdf` for the download link, real talk dates outstanding.
+Known gaps are tracked in **`TODO.md`** at the repo root (excluded from the build, so Pages does not publish it):
+no ORCID iD in the sidebar, no `files/cv.pdf` for the download link, real talk dates outstanding, 14 of 17 paper
+figures missing, `/cv-json/` half-populated.
+
+`files/3d-printing/` is where Joey drops STL/3MF/STEP source for the 3D-printed device work; its README (also
+excluded) carries the naming convention and the caveats. **Everything under `files/` is copied into the built site
+and served**, so a file pushed there is public immediately — the open question of which print files are safe to
+publish (patient-specific cutout geometry, licensing) is a checklist item in `TODO.md`, not something to answer on
+his behalf.
 
 ## Architecture
 

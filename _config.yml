@@ -176,6 +176,8 @@ exclude:
   - assets/js/vendor
   - CHANGELOG
   - CLAUDE.md
+  - TODO.md
+  - files/3d-printing/README.md
   - Capfile
   - config
   - Dockerfile
