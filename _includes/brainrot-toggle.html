@@ -1,0 +1,15 @@
+<!-- Gen Alpha translation toggle. The alternate copy lives in
+     /_data/brainrot.yml and is swapped in by setupBrainrot() in
+     /assets/js/_main.js, which does nothing unless this include is present. -->
+<div class="brainrot">
+  <input type="checkbox" id="brainrot-toggle" class="brainrot__input">
+  <label class="brainrot__label" for="brainrot-toggle">
+    <span class="brainrot__track" aria-hidden="true"><span class="brainrot__knob"></span></span>
+    <span class="brainrot__text">brainrot mode</span>
+  </label>
+  <span class="brainrot__hint" aria-hidden="true">
+    <span class="brainrot__hint--off">translate this page into Gen Alpha</span>
+    <span class="brainrot__hint--on">it's giving skibidi. you did this.</span>
+  </span>
+</div>
+<script type="application/json" id="brainrot-data">{{ site.data.brainrot | jsonify }}</script>

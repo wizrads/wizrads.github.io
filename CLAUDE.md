@@ -110,6 +110,31 @@ Its roster is embedded in the page and its "Load roster CSV" control reads a loc
 is **deliberately not shipped**. Its "First destination" panel reports categories only and does not publish
 employers — keep it that way if the data is ever extended.
 
+### Brainrot mode (the Gen Alpha toggle)
+
+The homepage carries a joke switch that swaps its copy for a Gen Alpha translation. Four moving parts:
+
+- `_data/brainrot.yml` — the alternate copy: `page:` (keyed by block), `nav:` (keyed by rendered nav label), `bio:`.
+  Values are injected as HTML, so a translation must carry over any links the real copy had.
+- `_pages/about.md` — each translatable block is tagged with a kramdown inline attribute list,
+  `{: data-brainrot="intro-lab"}` on the line after it. `{:` is not Liquid, so it survives the build; the IAL does
+  not disturb the heading ids `auto_ids` generates. The bullets are tagged as **one** list (`research-list`), so
+  that translation supplies all four `<li>` elements.
+- `_includes/brainrot-toggle.html` — the switch plus `<script type="application/json" id="brainrot-data">`, which is
+  just `site.data.brainrot | jsonify`. Included at the top of `about.md`.
+- `setupBrainrot()` in `assets/js/_main.js` (styles in `_sass/include/_brainrot.scss`) — reads that JSON, stores each
+  element's real `innerHTML`, and swaps. It returns immediately when the include is absent, so every other page is
+  untouched. The state persists in `localStorage.brainrot`.
+
+A block whose text is rewritten but whose key is left in place still renders fine — it just stops translating, so
+**editing the real copy can never break the page**. Keep the two in sync by hand. Nav labels are swapped in place,
+which means the greedy nav has to re-measure: `renderBrainrot()` triggers a `resize` for that reason. Only the
+homepage is translated, so the nav labels revert when you navigate away.
+
+**Attribution still applies here.** The `background-stanford` translation keeps the "team projects I was part of"
+framing for the 3D-printed devices and AVATAR 2.0 (see **Content** above) — do not let a punchier rewrite turn those
+into things he led.
+
 ### Hidden pages
 
 `/cv/` is deliberately hidden but not deleted: its nav entry is commented out in `_data/navigation.yml` and it carries

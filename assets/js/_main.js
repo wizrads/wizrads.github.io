@@ -135,6 +135,71 @@ function redrawPlotly() {
 }
 
 /* ==========================================================================
+   Brainrot mode - swaps the homepage copy for its Gen Alpha translation.
+   The alternate copy lives in /_data/brainrot.yml and is emitted as JSON by
+   /_includes/brainrot-toggle.html, so this does nothing on pages without
+   that include.
+   ========================================================================== */
+
+function setupBrainrot() {
+  const toggle = document.getElementById("brainrot-toggle");
+  const dataElement = document.getElementById("brainrot-data");
+  if (!toggle || !dataElement) {
+    return;
+  }
+
+  let copy;
+  try {
+    copy = JSON.parse(dataElement.textContent);
+  } catch (error) {
+    return;
+  }
+
+  const pageCopy = copy.page || {};
+  const navCopy = copy.nav || {};
+
+  /* Every element the toggle rewrites, paired with its translation. Blocks
+     with no translation, and translations with no block, are left alone. */
+  const swaps = [];
+  document.querySelectorAll("[data-brainrot]").forEach(function (element) {
+    const translation = pageCopy[element.getAttribute("data-brainrot")];
+    if (translation) {
+      swaps.push({ element: element, brainrot: translation, plain: element.innerHTML });
+    }
+  });
+
+  const bio = document.querySelector(".author__bio");
+  if (bio && copy.bio) {
+    swaps.push({ element: bio, brainrot: copy.bio, plain: bio.innerHTML });
+  }
+
+  document.querySelectorAll("#site-nav .masthead__menu-item a").forEach(function (link) {
+    const translation = navCopy[link.textContent.trim()];
+    if (translation) {
+      swaps.push({ element: link, brainrot: translation, plain: link.innerHTML });
+    }
+  });
+
+  function renderBrainrot(on) {
+    swaps.forEach(function (swap) {
+      swap.element.innerHTML = on ? swap.brainrot : swap.plain;
+    });
+    /* The greedy nav caches the width of every label, so make it re-measure. */
+    $(window).trigger("resize");
+  }
+
+  toggle.addEventListener("change", function () {
+    localStorage.setItem("brainrot", toggle.checked ? "on" : "off");
+    renderBrainrot(toggle.checked);
+  });
+
+  if (localStorage.getItem("brainrot") === "on") {
+    toggle.checked = true;
+    renderBrainrot(true);
+  }
+}
+
+/* ==========================================================================
    Actions that should occur when the page has been fully loaded
    ========================================================================== */
 
@@ -154,6 +219,9 @@ $(document).ready(function () {
 
   // Enable the theme toggle
   $('#theme-toggle').on('click', toggleTheme);
+
+  // Enable the Gen Alpha translation toggle, where the page has one
+  setupBrainrot();
 
   // Enable the sticky footer
   var bumpIt = function () {

@@ -1,0 +1,87 @@
+# Alternate "brainrot mode" copy for the homepage - the Gen Alpha translation
+# behind the toggle at the top of _pages/about.md.
+#
+# page: keys match the data-brainrot="..." attributes set with kramdown inline
+#       attribute lists in _pages/about.md. A key with no matching element, or
+#       an element with no matching key, is skipped, so rewriting the real copy
+#       can never break the page - that block just stops translating.
+# nav:  keys are the rendered nav labels from _data/navigation.yml.
+# bio:  replaces the sidebar bio from the author block in _config.yml.
+#
+# Values are injected as HTML, so carry over any links the original copy had.
+
+bio: >
+  Medical Physics PhD candidate cooking with treatment planning optimization,
+  HDR brachytherapy, and FLASH radiotherapy. Locked in.
+
+nav:
+  Publications: "Bangers"
+  Talks: "Yapping"
+  Teaching: "Teaching (fr)"
+  Portfolio: "The Folio"
+  Projects: "The Builds"
+
+page:
+  intro-lab: >
+    Okay so basically: I'm a Medical Physics PhD candidate at UW&ndash;Madison,
+    locked in at <a href="https://redlab.wiscweb.wisc.edu/">Bryan Bednarz's
+    Radiological Engineering and Design Laboratory</a> on radiation therapy
+    treatment planning, HDR brachytherapy, FLASH radiotherapy, clinical
+    workflow automation, and translational research. Heavy collab with Jordan
+    Slagowski, mostly on the brachytherapy optimization arc. The whole point is
+    building things that actually make it into the clinic instead of living in a
+    PDF forever.
+
+  intro-devices: >
+    Stuff I've had my hands on: patient-specific 3D-printed radiation therapy
+    devices (electron cutouts and photon blocks &mdash; yes, actually printed),
+    automated treatment planning and QA workflows, VR tools so patients aren't
+    terrified, and preclinical FLASH radiotherapy studies. Certified glow-up for
+    the linac.
+
+  intro-recent: >
+    Lately I've been locked in on optimization methods for HDR brachytherapy,
+    differentiable dose models, and machine learning that makes treatment
+    planning faster, more flexible, and way easier to validate. My favorite
+    problems are the ones where physics, software, biology, and actual clinical
+    implementation all collide &mdash; that intersection is peak. The goal:
+    radiation oncology tools accurate enough to trust, simple enough to deploy,
+    and useful enough to change how Monday morning actually goes. That's the
+    aura I'm chasing.
+
+  heading-research: "What I'm locked in on rn"
+
+  research-list: >
+    <li><strong>HDR brachytherapy optimization</strong> &mdash; solving catheter
+    positions and dwell times at the same time instead of guessing one and then
+    fixing the other, for focal dose escalation in prostate HDR. Also a robust
+    version that folds catheter selection into the inverse plan. One framework,
+    no crashout.</li>
+    <li><strong>Implicit neural representations (INRs)</strong> &mdash; the thing
+    I'm yapping about at my ASTRO 2026 Quick Pitch on directional brachytherapy
+    optimization. It's a neural net, but for dose. It's giving.</li>
+    <li><strong>FLASH radiotherapy</strong> &mdash; an open-source preclinical
+    FLASH treatment planning system and
+    <a href="https://github.com/wizrads/CollimatorCreator">Collimator Creator</a>,
+    plus a software-only conversion of a clinical Varian TrueBeam into FLASH
+    mode. Dose rate so high it's basically a speedrun. Any%.</li>
+    <li><strong>Machine learning for clinical workflows</strong> &mdash; an LLM
+    reading linac downtime reports so a human doesn't have to, deep-learning
+    autosegmentation for preclinical radiopharmaceutical therapy dosimetry, and
+    foundation segmentation models for markerless patient positioning. Let the
+    model contour, I'll handle the thinking.</li>
+
+  heading-background: "The lore"
+
+  background-stanford: >
+    Before the PhD arc I spent almost three years as a Medical Physicist
+    Assistant at Stanford Health Care, in the trenches on SRS, SBRT, IMRT, VMAT,
+    SGRT, and IGRT, and writing Python and C# (ESAPI) tools for treatment
+    planning and QA. I was part of a few team projects there that actually made
+    it to clinical implementation &mdash; a 3D-printed electron cutout program,
+    non-toxic 3D-printed photon blocks, and AVATAR 2.0, the audio-visual system
+    for anesthesia avoidance that later got licensed to Leo Cancer Care. Team
+    effort, I just contributed my part. Squad carried.
+
+  background-college: >
+    BS in Physics with a Math minor from Boston College. Go Eagles, no cap.
