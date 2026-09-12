@@ -148,9 +148,11 @@ when that key is set, `renderBrainrot()` shows and hides it, and the `src` is co
 the toggle goes on, so the file is never fetched for anyone who leaves brainrot mode alone. An `error` handler
 removes the element, so a missing or renamed file degrades to nothing rather than a broken image.
 
-It is `position: fixed` with `pointer-events: none`, and appears **only above 1500px**, where the gutter beside the
-1280px content column is finally wide enough (`max-width` is that gutter, so it can never overlap the text). It is
-also hidden under `prefers-reduced-motion`, since a loop the viewer cannot pause is the entire point of it. Swap the
+It is `position: fixed` in the **top right**, below the fixed masthead (`top: $masthead-height + 0.75em`, so it
+follows that constant if the masthead ever changes height) and at `z-index: 10`, under the masthead's 20. At 520px
+wide it is deliberately big enough to spill over the right of the 1280px content column and cover text —
+`pointer-events: none` is what keeps that purely visual, so links underneath still work. It shows above `$large`
+(925px) and is hidden under `prefers-reduced-motion`, since a loop the viewer cannot pause is the entire point. Swap the
 clip by dropping a file in `images/brainrot/` and renaming it in the YAML; comment the key out to remove the panel.
 Keep the file **local and small** — it is served from this repo, and nothing on this site loads from another host.
 

@@ -98,12 +98,14 @@
    ========================================================================== */
 
 .brainrot-gif {
-  /* Off below $x-large, where the page fills the window and there is no gutter
-     left to put it in. Turned back on in the media query at the bottom. */
+  /* Off on narrow screens, where it would bury the page. Turned back on in the
+     media query below. */
   display: none;
   position: fixed;
   right: 0.75em;
-  bottom: 0.75em;
+  /* Clear of the fixed masthead, which is $masthead-height tall and sits at
+     z-index 20 - so this stays under it either way. */
+  top: calc(#{$masthead-height} + 0.75em);
   z-index: 10;
   /* Decoration: never swallow a click meant for the page underneath. */
   pointer-events: none;
@@ -118,17 +120,15 @@
   height: auto;
 }
 
-/* 1500px is where the gutter beside the $x-large content column is finally
-   wide enough for a readable strip; below that there is nowhere to put it that
-   does not sit on top of the text. */
-@media (min-width: 1500px) {
+/* Deliberately big enough to spill over the right-hand side of the content
+   column - it is pointer-events: none, so it covers the text visually and
+   nothing else. Below $large the page is too narrow for that to be funny
+   rather than unusable, so it stays off. */
+@media (min-width: $large) {
   .brainrot-gif:not([hidden]) {
     display: block;
-    /* The clip is landscape, so this is a card in the corner rather than the
-       full-height strip a vertical one would get. Never wider than the gutter,
-       so it cannot overlap the page. */
-    width: 220px;
-    max-width: calc((100vw - #{$x-large}) / 2 - 1em);
+    width: 520px;
+    max-width: 40vw;
   }
 }
 
