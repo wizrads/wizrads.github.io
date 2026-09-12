@@ -110,6 +110,12 @@
   z-index: 10;
   /* Decoration: never swallow a click meant for the page underneath. */
   pointer-events: none;
+  /* The column is taller than a laptop viewport once there are a few clips in
+     it, and a fixed element cannot be scrolled to - so cap it at the window
+     and let the clips shrink into what is left. */
+  flex-direction: column;
+  align-items: flex-end;
+  max-height: calc(100vh - #{$masthead-height} - 1.5em);
 }
 
 .brainrot-gif__media {
@@ -119,6 +125,13 @@
   margin: 0 0 0.75em auto;
   height: auto;
   max-width: 40vw;
+  /* Shrink, never stretch, and keep the aspect ratio and the right edge while
+     shrinking - without min-height: 0 a flex item refuses to go below its
+     content size and the column overflows anyway. */
+  flex: 0 1 auto;
+  min-height: 0;
+  object-fit: contain;
+  object-position: right center;
   border-radius: 6px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
@@ -136,7 +149,7 @@
    rather than unusable, so it stays off. */
 @media (min-width: $large) {
   .brainrot-gif:not([hidden]) {
-    display: block;
+    display: flex;
   }
 }
 

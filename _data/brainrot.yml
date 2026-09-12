@@ -110,3 +110,5 @@ gifs:
   - src: /images/brainrot/cat.gif
     width: 340px
     cutout: true
+  - src: /images/brainrot/rizzler.gif
+    width: 420px

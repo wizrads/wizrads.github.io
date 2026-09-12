@@ -141,8 +141,8 @@ frame reads a stale masthead height and leaves the body padding a few pixels off
 
 Emoji are plain characters in the YAML, rendered by the system emoji font, so none of them costs a request.
 
-**The gutter clips.** `gifs:` in `_data/brainrot.yml` lists looping files in the repo — currently the Subway
-Surfers loop and a cat — stacked down the right of the page while the toggle is on, the gameplay half of a brainrot
+**The gutter clips.** `gifs:` in `_data/brainrot.yml` lists looping files in the repo — currently Subway Surfers, a cat, and the
+Rizzler — stacked down the right of the page while the toggle is on, the gameplay half of a brainrot
 TikTok. Each entry takes `src` (site-relative path), an optional `width` (default 520px, applied inline), and
 `cutout: true` for a clip with a transparent background, which drops the rounded card and shadow the rectangular ones
 get. The `<aside id="brainrot-gif">` renders only when the list is non-empty, `renderBrainrot()` shows and hides it,
@@ -155,7 +155,9 @@ it follows that constant if the masthead ever changes height) and at `z-index: 1
 the first clip is deliberately big enough to spill over the right of the 1280px content column and cover text —
 `pointer-events: none` on the panel is what keeps that purely visual, so links underneath still work. It shows above
 `$large` (925px) and is hidden under `prefers-reduced-motion`, since a loop the viewer cannot pause is the entire
-point. Add a clip by dropping a file in `images/brainrot/` and appending an entry; keep the files **local and small**
+point. The column is a flex column capped at the window height, and the clips are `flex: 0 1 auto; min-height: 0;
+object-fit: contain` so they shrink together on a short screen instead of running off the bottom of a fixed element
+nobody can scroll to. Add a clip by dropping a file in `images/brainrot/` and appending an entry; keep the files **local and small**
 — they are served from this repo, and nothing on this site loads from another host.
 
 `images/brainrot/cat.gif` was a 1000×1000 green-screen GIF, 8.3MB. It was resized to 300px and had the green keyed
