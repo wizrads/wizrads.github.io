@@ -14,12 +14,11 @@
   width: 100%;
   clear: both;
 
-  /* keep footer in normal document flow so custom widgets do not overlap content */
+  /* In normal document flow, at the end of the page - it scrolls up into view
+     like the rest of the content. It used to be position: fixed, pinned to the
+     bottom of the window on every screen, which needed body padding and a JS
+     resize loop (bumpIt, since removed) to keep it off the content. */
   height: auto;
-
-  /* keep the footer on the bottom of the page */
-  position: fixed;
-  bottom: 0;
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
@@ -64,14 +63,6 @@
   .far,
   .fal {
     color: var(--global-text-color-light);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  /* don't pin the footer on mobile devices */
-  .page__footer {
-    position: relative;
-    bottom: auto;
   }
 }
 

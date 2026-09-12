@@ -259,6 +259,11 @@ by accident.
 - **`_sass/layout/_footer.scss` + `_includes/footer.html`** — the footer is one compact flex row (~46px, was ~93px).
   The `@include clearfix` was removed from that rule deliberately: its `::before`/`::after` pseudo-elements become
   flex items and force the copyright onto its own line.
+  It is also in **normal document flow**, at the end of the page. Upstream had it `position: fixed; bottom: 0`,
+  parked across the bottom of the window on every screen, which needed three other pieces to stay out of the way:
+  `body { padding-bottom: 9em }` in `_sass/layout/_base.scss`, a `bumpIt()` function in `_main.js` that re-set the
+  body's margin from the footer's measured height on a 250ms `setInterval`, and a `max-width: 768px` rule un-pinning
+  it on phones. All four are gone together — if you ever re-pin the footer, they come back as a set.
 Navigation is a plain full page load. Hover-prefetching (instant.page) was added and then **deliberately reverted**
 at Joey's request — do not reintroduce it or a client-side router without asking.
 

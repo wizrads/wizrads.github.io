@@ -23,7 +23,6 @@ body {
   @include breakpoint($medium) {
     padding-top: $masthead-height;
   }
-  padding-bottom: 9em;
   font-family: $global-font-family;
   line-height: 1.5;
 
