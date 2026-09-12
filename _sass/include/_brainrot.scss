@@ -118,15 +118,13 @@
 
 .brainrot-gif__media {
   display: block;
-  margin: 0 0 0.75em 0;
+  margin-bottom: 0.75em;
   /* Sized by max-* only, never width/height, so the browser scales each clip
      by its own aspect ratio and the element is exactly the picture - set a
      width and a shrunk image sits letterboxed inside a wider white box.
      max-width is inline, per clip; this is an equal share of what is left of
      the window, so the column always fits without anything being cut off. */
   max-height: calc((100vh - #{$masthead-height} - 1.5em) / var(--brainrot-count, 1) - 0.75em);
-  width: auto;
-  height: auto;
 }
 
 .brainrot-gif:not([hidden]) {

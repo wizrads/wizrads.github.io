@@ -180,36 +180,22 @@ function setupBrainrot() {
     }
   });
 
-  /* The looping clips down the right of the page. Absent unless gifs: is set
-     in _data/brainrot.yml. A file that 404s takes only its own clip with it,
-     and the panel goes when the last one does, so a missing or renamed file
-     leaves the page exactly as it was. */
+  /* The looping clips down the right of the page, absent unless gifs: is set
+     in _data/brainrot.yml. */
   const gifPanel = document.getElementById("brainrot-gif");
-  const gifMedia = gifPanel
-    ? Array.prototype.slice.call(gifPanel.querySelectorAll(".brainrot-gif__media"))
-    : [];
-  gifMedia.forEach(function (media) {
-    media.addEventListener("error", function () {
-      media.remove();
-      if (!gifPanel.querySelector(".brainrot-gif__media")) {
-        gifPanel.remove();
-      }
-    });
-  });
 
   function renderBrainrot(on) {
     swaps.forEach(function (swap) {
       swap.element.innerHTML = on ? swap.brainrot : swap.plain;
     });
-    if (gifPanel && gifPanel.isConnected) {
-      /* Only fetch the files once someone actually asks for them, so the
-         homepage costs nothing extra for everyone who leaves the toggle
-         alone. */
+    if (gifPanel) {
+      /* Each clip's src is only filled in the first time the toggle goes on,
+         so the homepage costs nothing extra for everyone who leaves it alone.
+         Clearing data-src is what makes this run once per clip. */
       if (on) {
-        gifMedia.forEach(function (media) {
-          if (!media.getAttribute("src")) {
-            media.setAttribute("src", media.getAttribute("data-src"));
-          }
+        gifPanel.querySelectorAll("[data-src]").forEach(function (media) {
+          media.src = media.dataset.src;
+          media.removeAttribute("data-src");
         });
       }
       gifPanel.hidden = !on;

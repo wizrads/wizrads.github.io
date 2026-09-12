@@ -151,9 +151,9 @@ Emoji are plain characters in the YAML, rendered by the system emoji font, so no
 cat, and the Rizzler — stacked down the right of the page while the toggle is on, the gameplay half of a brainrot
 TikTok. Each entry takes `src` (site-relative path) and an optional `width` (default 520px). The
 `<aside id="brainrot-gif">` renders only when the list is non-empty, `renderBrainrot()` shows and hides it, and each
-`src` is copied from `data-src` the *first* time the toggle goes on, so nothing is fetched for anyone who leaves
-brainrot mode alone. An `error` handler removes just that one `<img>`, and the panel with the last of them, so a
-missing or renamed file degrades to nothing rather than a broken image.
+`src` is copied from `data-src` the *first* time the toggle goes on (and the `data-src` cleared, which is what makes
+that run once), so nothing is fetched for anyone who leaves brainrot mode alone. There is no `error` handling: a
+`src` naming a file that is not there shows a broken-image icon, so keep the list and `images/brainrot/` in sync.
 
 The panel is `position: fixed` in the **top right**, below the fixed masthead (`top: $masthead-height + 0.75em`, so
 it follows that constant if the masthead ever changes height) and at `z-index: 10`, under the masthead's 20. The
