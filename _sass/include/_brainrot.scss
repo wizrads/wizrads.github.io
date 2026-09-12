@@ -99,9 +99,7 @@
    ========================================================================== */
 
 .brainrot-gif {
-  /* Off on narrow screens, where it would bury the page. Turned back on in the
-     media query below. */
-  display: none;
+  display: flex;
   position: fixed;
   right: 0.75em;
   /* Clear of the fixed masthead, which is $masthead-height tall and sits at
@@ -124,6 +122,9 @@
      The width itself is inline, from the YAML. */
   margin: 0 0 0.75em auto;
   height: auto;
+  /* The inline widths are deliberately bigger than the content column - the
+     clips spill over the text on purpose, and pointer-events: none on the
+     panel keeps that purely visual. 40vw is what stops them burying a phone. */
   max-width: 40vw;
   /* Shrink, never stretch, and keep the aspect ratio and the right edge while
      shrinking - without min-height: 0 a flex item refuses to go below its
@@ -141,16 +142,6 @@
 .brainrot-gif__media--cutout {
   border-radius: 0;
   box-shadow: none;
-}
-
-/* Deliberately big enough to spill over the right-hand side of the content
-   column - the panel is pointer-events: none, so it covers the text visually
-   and nothing else. Below $large the page is too narrow for that to be funny
-   rather than unusable, so it stays off. */
-@media (min-width: $large) {
-  .brainrot-gif:not([hidden]) {
-    display: flex;
-  }
 }
 
 /* Animation the viewer cannot stop is the whole point of the thing, so honour
