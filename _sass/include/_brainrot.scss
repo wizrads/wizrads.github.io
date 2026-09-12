@@ -115,8 +115,7 @@
 .brainrot-gif__media {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 /* 1500px is where the gutter beside the $x-large content column is finally
@@ -125,12 +124,11 @@
 @media (min-width: 1500px) {
   .brainrot-gif:not([hidden]) {
     display: block;
-    /* A phone-shaped strip, the way the gameplay half of one of these is cut.
-       Never wider than the gutter, so it cannot overlap the page. */
-    width: 200px;
+    /* The clip is landscape, so this is a card in the corner rather than the
+       full-height strip a vertical one would get. Never wider than the gutter,
+       so it cannot overlap the page. */
+    width: 220px;
     max-width: calc((100vw - #{$x-large}) / 2 - 1em);
-    height: 60vh;
-    max-height: 520px;
   }
 }
 
