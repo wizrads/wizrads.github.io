@@ -170,9 +170,11 @@ libsass eats `min()` anyway; `max-height` is an equal share of the window, `(100
 with the count emitted onto the `<aside>` by Liquid. That is what keeps the column inside a viewport nobody can
 scroll — it is `position: fixed`.
 
-**`display` belongs on `.brainrot-gif:not([hidden])`, never on `.brainrot-gif`.** An author `display` on the element
-itself beats the browser's own `[hidden] { display: none }`, and the clips then play for everyone with the toggle
-off. That shipped once.
+**The panel needs `display: none` on `.brainrot-gif` *and* `display: flex` on `.brainrot-gif:not([hidden])`.**
+Neither alone works, and both failures have shipped. The `hidden` attribute the JS sets is inert here, because the
+HTML5 reset in `_sass/layout/_reset.scss` sets `aside { display: block }` and any author rule beats the browser's own
+`[hidden] { display: none }` — so with no `display: none` the clips keep playing after the toggle goes off. Put the
+visible `display` on the bare selector instead and they play for everyone who never touched the toggle.
 
 `images/brainrot/cat.gif` was a 1000×1000 green-screen GIF, 8.3MB. It was resized to 300px and had the green keyed
 out to real GIF transparency frame by frame with Pillow (a throwaway script, not kept: convert each frame to RGBA,

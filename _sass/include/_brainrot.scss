@@ -99,9 +99,11 @@
    ========================================================================== */
 
 .brainrot-gif {
-  /* display lives in the :not([hidden]) rule below, NOT here: an author
-     display on this selector beats the browser's own [hidden] rule, and the
-     clips then play for everyone with the toggle off. */
+  /* Both display states are spelled out here, and both are needed: the HTML5
+     reset sets aside { display: block }, which beats the browser's own
+     [hidden] rule, so without this the clips keep playing after the toggle
+     goes off. */
+  display: none;
   position: fixed;
   right: 0.75em;
   /* Clear of the fixed masthead, which is $masthead-height tall and sits at
