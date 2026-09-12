@@ -141,24 +141,32 @@ frame reads a stale masthead height and leaves the body padding a few pixels off
 
 Emoji are plain characters in the YAML, rendered by the system emoji font, so none of them costs a request.
 
-**The gutter clips.** `gifs:` in `_data/brainrot.yml` lists looping files in the repo — currently Subway Surfers, a cat, and the
-Rizzler — stacked down the right of the page while the toggle is on, the gameplay half of a brainrot
-TikTok. Each entry takes `src` (site-relative path), an optional `width` (default 520px, applied inline), and
-`cutout: true` for a clip with a transparent background, which drops the rounded card and shadow the rectangular ones
-get. The `<aside id="brainrot-gif">` renders only when the list is non-empty, `renderBrainrot()` shows and hides it,
-and each `src` is copied from `data-src` the *first* time the toggle goes on, so nothing is fetched for anyone who
-leaves brainrot mode alone. An `error` handler removes just that one `<img>`, and the panel with the last of them, so
-a missing or renamed file degrades to nothing rather than a broken image.
+**The gutter clips.** `gifs:` in `_data/brainrot.yml` lists looping files in the repo — currently Subway Surfers, a
+cat, and the Rizzler — stacked down the right of the page while the toggle is on, the gameplay half of a brainrot
+TikTok. Each entry takes `src` (site-relative path) and an optional `width` (default 520px). The
+`<aside id="brainrot-gif">` renders only when the list is non-empty, `renderBrainrot()` shows and hides it, and each
+`src` is copied from `data-src` the *first* time the toggle goes on, so nothing is fetched for anyone who leaves
+brainrot mode alone. An `error` handler removes just that one `<img>`, and the panel with the last of them, so a
+missing or renamed file degrades to nothing rather than a broken image.
 
 The panel is `position: fixed` in the **top right**, below the fixed masthead (`top: $masthead-height + 0.75em`, so
-it follows that constant if the masthead ever changes height) and at `z-index: 10`, under the masthead's 20. At 520px
-the first clip is deliberately big enough to spill over the right of the 1280px content column and cover text —
-`pointer-events: none` on the panel is what keeps that purely visual, so links underneath still work. It shows above
-`$large` (925px) and is hidden under `prefers-reduced-motion`, since a loop the viewer cannot pause is the entire
-point. The column is a flex column capped at the window height, and the clips are `flex: 0 1 auto; min-height: 0;
-object-fit: contain` so they shrink together on a short screen instead of running off the bottom of a fixed element
-nobody can scroll to. Add a clip by dropping a file in `images/brainrot/` and appending an entry; keep the files **local and small**
-— they are served from this repo, and nothing on this site loads from another host.
+it follows that constant if the masthead ever changes height) and at `z-index: 10`, under the masthead's 20. The
+clips are deliberately wider than the gutter and cover the text — `pointer-events: none` on the panel is what keeps
+that purely visual, so links underneath still work. They show at **every width**; `prefers-reduced-motion` is the
+only thing that suppresses them, since a loop the viewer cannot pause is the entire point.
+
+**Size each clip with `max-width` and `max-height` only — never `width` or `height`.** Two constraints and no fixed
+dimension is what makes the browser scale each one by its own aspect ratio, so the element *is* the picture. Setting
+a width instead leaves a shrunken image letterboxed inside a wider box, which is what the drop shadow and rounded
+corners used to frame (both now gone, along with the `cutout:` flag that existed to opt out of them). `max-width` is
+inline per clip, written `min(<width>, 42vw)` in the include because the stylesheet cannot also set that property and
+libsass eats `min()` anyway; `max-height` is an equal share of the window, `(100vh - masthead) / var(--brainrot-count)`,
+with the count emitted onto the `<aside>` by Liquid. That is what keeps the column inside a viewport nobody can
+scroll — it is `position: fixed`.
+
+**`display` belongs on `.brainrot-gif:not([hidden])`, never on `.brainrot-gif`.** An author `display` on the element
+itself beats the browser's own `[hidden] { display: none }`, and the clips then play for everyone with the toggle
+off. That shipped once.
 
 `images/brainrot/cat.gif` was a 1000×1000 green-screen GIF, 8.3MB. It was resized to 300px and had the green keyed
 out to real GIF transparency frame by frame with Pillow (a throwaway script, not kept: convert each frame to RGBA,

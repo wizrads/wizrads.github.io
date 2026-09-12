@@ -14,9 +14,9 @@
 #         src:    site-relative path to a file in this repo - drop it in
 #                 images/brainrot/. It must be local: nothing on this site
 #                 loads from another host.
-#         width:  optional CSS width for that clip. Defaults to 520px.
-#         cutout: true for a clip with a transparent background, which skips
-#                 the rounded card and drop shadow the rectangular ones get.
+#         width:  optional cap on that clip's width. Defaults to 520px. It is
+#                 a maximum, not a width: each clip also gets an equal share of
+#                 the window height, and keeps its own aspect ratio inside both.
 #       Delete the list, or comment it out, to turn the panel off entirely.
 #
 # Values are injected as HTML, so carry over any links the original copy had.
@@ -109,6 +109,5 @@ gifs:
     width: 520px
   - src: /images/brainrot/cat.gif
     width: 340px
-    cutout: true
   - src: /images/brainrot/rizzler.gif
     width: 420px

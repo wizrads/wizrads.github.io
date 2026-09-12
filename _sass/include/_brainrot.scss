@@ -110,40 +110,21 @@
   z-index: 10;
   /* Decoration: never swallow a click meant for the page underneath. */
   pointer-events: none;
-  /* The column is taller than a laptop viewport once there are a few clips in
-     it, and a fixed element cannot be scrolled to - so cap it at the window
-     and let the clips shrink into what is left. */
   flex-direction: column;
   align-items: flex-end;
-  max-height: calc(100vh - #{$masthead-height} - 1.5em);
 }
 
 .brainrot-gif__media {
   display: block;
-  /* Right-aligned so a narrower clip lines up with the edge of a wider one.
-     The width itself is inline, from the YAML. */
-  margin: 0 0 0.75em auto;
+  margin: 0 0 0.75em 0;
+  /* Sized by max-* only, never width/height, so the browser scales each clip
+     by its own aspect ratio and the element is exactly the picture - set a
+     width and a shrunk image sits letterboxed inside a wider white box.
+     max-width is inline, per clip; this is an equal share of what is left of
+     the window, so the column always fits without anything being cut off. */
+  max-height: calc((100vh - #{$masthead-height} - 1.5em) / var(--brainrot-count, 1) - 0.75em);
+  width: auto;
   height: auto;
-  /* The inline widths are deliberately bigger than the content column - the
-     clips spill over the text on purpose, and pointer-events: none on the
-     panel keeps that purely visual. 40vw is what stops them burying a phone. */
-  max-width: 40vw;
-  /* Shrink, never stretch, and keep the aspect ratio and the right edge while
-     shrinking - without min-height: 0 a flex item refuses to go below its
-     content size and the column overflows anyway. */
-  flex: 0 1 auto;
-  min-height: 0;
-  object-fit: contain;
-  object-position: right center;
-  border-radius: 6px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-}
-
-/* A clip that has been keyed out to a transparent background is not a
-   rectangle, so the card treatment would frame empty space around it. */
-.brainrot-gif__media--cutout {
-  border-radius: 0;
-  box-shadow: none;
 }
 
 .brainrot-gif:not([hidden]) {

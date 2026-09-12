@@ -16,12 +16,20 @@
 <!-- The looping clips that stack down the right of the page while brainrot
      mode is on. Hidden until the toggle is flipped, and each one is dropped if
      its file is missing. The list comes from gifs: in /_data/brainrot.yml, and
-     the files are only fetched the first time the toggle goes on. -->
-<aside class="brainrot-gif" id="brainrot-gif" aria-hidden="true" hidden>
+     the files are only fetched the first time the toggle goes on.
+
+     Each clip is sized with max-width/max-height only, never width - that is
+     what lets the browser scale it by its own aspect ratio. The 42vw in the
+     inline max-width is what keeps a 520px clip off most of a phone screen;
+     it is written here rather than in the stylesheet because the two would be
+     the same property, and libsass would eat a min() there anyway. --brainrot-count
+     gives the stylesheet the number of clips so each gets an equal share of
+     the window height. -->
+<aside class="brainrot-gif" id="brainrot-gif" aria-hidden="true" hidden
+       style="--brainrot-count: {{ site.data.brainrot.gifs | size }}">
   {% for clip in site.data.brainrot.gifs %}
-  <img class="brainrot-gif__media{% if clip.cutout %} brainrot-gif__media--cutout{% endif %}"
-       data-src="{{ clip.src | relative_url }}" alt=""
-       style="width: {{ clip.width | default: '520px' }}">
+  <img class="brainrot-gif__media" data-src="{{ clip.src | relative_url }}" alt=""
+       style="max-width: min({{ clip.width | default: '520px' }}, 42vw)">
   {% endfor %}
 </aside>
 {% endif %}
