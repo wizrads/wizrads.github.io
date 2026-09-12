@@ -180,10 +180,29 @@ function setupBrainrot() {
     }
   });
 
+  /* The looping clip in the right gutter. Absent unless gif: is set in
+     _data/brainrot.yml, and dropped on the floor if the file 404s, so a
+     missing or renamed file leaves the page exactly as it was. */
+  const gif = document.getElementById("brainrot-gif");
+  const gifMedia = gif && gif.querySelector(".brainrot-gif__media");
+  if (gifMedia) {
+    gifMedia.addEventListener("error", function () {
+      gif.remove();
+    });
+  }
+
   function renderBrainrot(on) {
     swaps.forEach(function (swap) {
       swap.element.innerHTML = on ? swap.brainrot : swap.plain;
     });
+    if (gif && gif.isConnected) {
+      /* Only fetch the file once someone actually asks for it, so the homepage
+         costs nothing extra for everyone who leaves the toggle alone. */
+      if (on && !gifMedia.getAttribute("src")) {
+        gifMedia.setAttribute("src", gifMedia.getAttribute("data-src"));
+      }
+      gif.hidden = !on;
+    }
     /* The greedy nav caches the width of every label and the masthead reserves
        a fixed height, so make it re-measure - but only once the new labels have
        actually reflowed, or it reads a stale height and leaves the body padding

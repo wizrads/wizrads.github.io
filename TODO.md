@@ -26,6 +26,9 @@ Then, per file:
 
 ## Known gaps
 
+- [ ] **Brainrot gutter clip** — the panel is wired up but the file is not there yet. Drop the loop at
+      `images/brainrot/subway-surfers.gif` (or rename `gif:` in `_data/brainrot.yml` to match whatever you drop in).
+      Until then the panel removes itself on the 404 and nothing changes.
 - [ ] ORCID iD for the sidebar — `author.orcid` in `_config.yml` is still blank
 - [ ] `files/cv.pdf` for the CV download link
 - [ ] Real talk dates — every `_talks` file uses `YYYY-01-01` because the CV only gives years

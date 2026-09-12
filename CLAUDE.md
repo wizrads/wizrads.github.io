@@ -116,6 +116,7 @@ The homepage carries a joke switch that swaps its copy for a Gen Alpha translati
 
 - `_data/brainrot.yml` — the alternate copy: `page:` (keyed by block), `nav:` (keyed by rendered nav label), `bio:`.
   Values are injected as HTML, so a translation must carry over any links the real copy had.
+  `gif:` is the odd one out: a site-relative path to the looping clip described below, not copy.
 - `_pages/about.md` — each translatable block is tagged with a kramdown inline attribute list,
   `{: data-brainrot="intro-lab"}` on the line after it. `{:` is not Liquid, so it survives the build; the IAL does
   not disturb the heading ids `auto_ids` generates. The bullets are tagged as **one** list (`research-list`), so
@@ -139,6 +140,19 @@ a `resize` on the **next animation frame** so the greedy nav re-measures a settl
 frame reads a stale masthead height and leaves the body padding a few pixels off.
 
 Emoji are plain characters in the YAML, rendered by the system emoji font, so none of them costs a request.
+
+**The gutter clip.** `gif:` in `_data/brainrot.yml` names a looping file in the repo (currently
+`/images/brainrot/subway-surfers.gif`) that plays in a fixed strip to the right of the page while the toggle is on —
+the gameplay half of a brainrot TikTok. The `<aside id="brainrot-gif">` is rendered by `brainrot-toggle.html` only
+when that key is set, `renderBrainrot()` shows and hides it, and the `src` is copied from `data-src` the *first* time
+the toggle goes on, so the file is never fetched for anyone who leaves brainrot mode alone. An `error` handler
+removes the element, so a missing or renamed file degrades to nothing rather than a broken image.
+
+It is `position: fixed` with `pointer-events: none`, and appears **only above 1500px**, where the gutter beside the
+1280px content column is finally wide enough (`max-width` is that gutter, so it can never overlap the text). It is
+also hidden under `prefers-reduced-motion`, since a loop the viewer cannot pause is the entire point of it. Swap the
+clip by dropping a file in `images/brainrot/` and renaming it in the YAML; comment the key out to remove the panel.
+Keep the file **local and small** — it is served from this repo, and nothing on this site loads from another host.
 
 **Attribution still applies here.** The `background-stanford` translation keeps the "team projects I was part of"
 framing for the 3D-printed devices and AVATAR 2.0 (see **Content** above) — do not let a punchier rewrite turn those
