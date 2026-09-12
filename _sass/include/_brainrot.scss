@@ -99,7 +99,9 @@
    ========================================================================== */
 
 .brainrot-gif {
-  display: flex;
+  /* display lives in the :not([hidden]) rule below, NOT here: an author
+     display on this selector beats the browser's own [hidden] rule, and the
+     clips then play for everyone with the toggle off. */
   position: fixed;
   right: 0.75em;
   /* Clear of the fixed masthead, which is $masthead-height tall and sits at
@@ -142,6 +144,10 @@
 .brainrot-gif__media--cutout {
   border-radius: 0;
   box-shadow: none;
+}
+
+.brainrot-gif:not([hidden]) {
+  display: flex;
 }
 
 /* Animation the viewer cannot stop is the whole point of the thing, so honour
