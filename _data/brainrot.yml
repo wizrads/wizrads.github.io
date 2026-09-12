@@ -8,11 +8,16 @@
 # nav:  keys are the rendered nav labels from _data/navigation.yml.
 # bio:  replaces the sidebar bio from the author block in _config.yml.
 #
-# gif:  optional looping clip played in the right gutter while brainrot mode
-#       is on, the way a brainrot TikTok runs gameplay next to the content.
-#       Site-relative path to a file in this repo - drop the file in
-#       images/brainrot/ and name it here. Comment it out to turn the panel
-#       off. It must be local: nothing on this site loads from another host.
+# gifs: the looping clips stacked down the top right of the page while
+#       brainrot mode is on, the way a brainrot TikTok runs gameplay next to
+#       the content. One entry per clip, top to bottom:
+#         src:    site-relative path to a file in this repo - drop it in
+#                 images/brainrot/. It must be local: nothing on this site
+#                 loads from another host.
+#         width:  optional CSS width for that clip. Defaults to 520px.
+#         cutout: true for a clip with a transparent background, which skips
+#                 the rounded card and drop shadow the rectangular ones get.
+#       Delete the list, or comment it out, to turn the panel off entirely.
 #
 # Values are injected as HTML, so carry over any links the original copy had.
 # Emoji are plain characters rendered by the system emoji font - no web font,
@@ -99,4 +104,9 @@ page:
   background-college: >
     BS in Physics with a Math minor from Boston College 🦅. Go Eagles, no cap.
 
-gif: /images/brainrot/subway-surfers.gif
+gifs:
+  - src: /images/brainrot/subway-surfers.gif
+    width: 520px
+  - src: /images/brainrot/cat.gif
+    width: 340px
+    cutout: true

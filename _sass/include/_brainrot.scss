@@ -92,9 +92,10 @@
 }
 
 /* ==========================================================================
-   The gutter clip - a brainrot TikTok's second video, pinned to the right of
-   the page while the toggle is on. Markup in the same include, shown/hidden by
-   setupBrainrot(). The file is named by gif: in /_data/brainrot.yml.
+   The gutter clips - a brainrot TikTok's second video, stacked down the right
+   of the page while the toggle is on. Markup in the same include, shown and
+   hidden by setupBrainrot(). The list is gifs: in /_data/brainrot.yml, which
+   also sets each clip's width.
    ========================================================================== */
 
 .brainrot-gif {
@@ -104,31 +105,38 @@
   position: fixed;
   right: 0.75em;
   /* Clear of the fixed masthead, which is $masthead-height tall and sits at
-     z-index 20 - so this stays under it either way. */
+     z-index 20 - so these stay under it either way. */
   top: calc(#{$masthead-height} + 0.75em);
   z-index: 10;
   /* Decoration: never swallow a click meant for the page underneath. */
   pointer-events: none;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
 .brainrot-gif__media {
   display: block;
-  width: 100%;
+  /* Right-aligned so a narrower clip lines up with the edge of a wider one.
+     The width itself is inline, from the YAML. */
+  margin: 0 0 0.75em auto;
   height: auto;
+  max-width: 40vw;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* A clip that has been keyed out to a transparent background is not a
+   rectangle, so the card treatment would frame empty space around it. */
+.brainrot-gif__media--cutout {
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Deliberately big enough to spill over the right-hand side of the content
-   column - it is pointer-events: none, so it covers the text visually and
-   nothing else. Below $large the page is too narrow for that to be funny
+   column - the panel is pointer-events: none, so it covers the text visually
+   and nothing else. Below $large the page is too narrow for that to be funny
    rather than unusable, so it stays off. */
 @media (min-width: $large) {
   .brainrot-gif:not([hidden]) {
     display: block;
-    width: 520px;
-    max-width: 40vw;
   }
 }
 

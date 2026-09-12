@@ -12,13 +12,17 @@
     <span class="brainrot__hint--on">it's giving skibidi. you did this. 💀</span>
   </span>
 </div>
-{% if site.data.brainrot.gif %}
-<!-- The looping clip that runs in the right gutter while brainrot mode is on.
-     Hidden until the toggle is flipped, and dropped entirely if the file is
-     missing. Path comes from gif: in /_data/brainrot.yml, and is only
-     fetched the first time the toggle is flipped on. -->
+{% if site.data.brainrot.gifs %}
+<!-- The looping clips that stack down the right of the page while brainrot
+     mode is on. Hidden until the toggle is flipped, and each one is dropped if
+     its file is missing. The list comes from gifs: in /_data/brainrot.yml, and
+     the files are only fetched the first time the toggle goes on. -->
 <aside class="brainrot-gif" id="brainrot-gif" aria-hidden="true" hidden>
-  <img class="brainrot-gif__media" data-src="{{ site.data.brainrot.gif | relative_url }}" alt="">
+  {% for clip in site.data.brainrot.gifs %}
+  <img class="brainrot-gif__media{% if clip.cutout %} brainrot-gif__media--cutout{% endif %}"
+       data-src="{{ clip.src | relative_url }}" alt=""
+       style="width: {{ clip.width | default: '520px' }}">
+  {% endfor %}
 </aside>
 {% endif %}
 <script type="application/json" id="brainrot-data">{{ site.data.brainrot | jsonify }}</script>

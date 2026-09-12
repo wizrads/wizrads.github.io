@@ -116,7 +116,7 @@ The homepage carries a joke switch that swaps its copy for a Gen Alpha translati
 
 - `_data/brainrot.yml` — the alternate copy: `page:` (keyed by block), `nav:` (keyed by rendered nav label), `bio:`.
   Values are injected as HTML, so a translation must carry over any links the real copy had.
-  `gif:` is the odd one out: a site-relative path to the looping clip described below, not copy.
+  `gifs:` is the odd one out: the list of looping clips described below, not copy.
 - `_pages/about.md` — each translatable block is tagged with a kramdown inline attribute list,
   `{: data-brainrot="intro-lab"}` on the line after it. `{:` is not Liquid, so it survives the build; the IAL does
   not disturb the heading ids `auto_ids` generates. The bullets are tagged as **one** list (`research-list`), so
@@ -141,20 +141,28 @@ frame reads a stale masthead height and leaves the body padding a few pixels off
 
 Emoji are plain characters in the YAML, rendered by the system emoji font, so none of them costs a request.
 
-**The gutter clip.** `gif:` in `_data/brainrot.yml` names a looping file in the repo (currently
-`/images/brainrot/subway-surfers.gif`) that plays in a fixed strip to the right of the page while the toggle is on —
-the gameplay half of a brainrot TikTok. The `<aside id="brainrot-gif">` is rendered by `brainrot-toggle.html` only
-when that key is set, `renderBrainrot()` shows and hides it, and the `src` is copied from `data-src` the *first* time
-the toggle goes on, so the file is never fetched for anyone who leaves brainrot mode alone. An `error` handler
-removes the element, so a missing or renamed file degrades to nothing rather than a broken image.
+**The gutter clips.** `gifs:` in `_data/brainrot.yml` lists looping files in the repo — currently the Subway
+Surfers loop and a cat — stacked down the right of the page while the toggle is on, the gameplay half of a brainrot
+TikTok. Each entry takes `src` (site-relative path), an optional `width` (default 520px, applied inline), and
+`cutout: true` for a clip with a transparent background, which drops the rounded card and shadow the rectangular ones
+get. The `<aside id="brainrot-gif">` renders only when the list is non-empty, `renderBrainrot()` shows and hides it,
+and each `src` is copied from `data-src` the *first* time the toggle goes on, so nothing is fetched for anyone who
+leaves brainrot mode alone. An `error` handler removes just that one `<img>`, and the panel with the last of them, so
+a missing or renamed file degrades to nothing rather than a broken image.
 
-It is `position: fixed` in the **top right**, below the fixed masthead (`top: $masthead-height + 0.75em`, so it
-follows that constant if the masthead ever changes height) and at `z-index: 10`, under the masthead's 20. At 520px
-wide it is deliberately big enough to spill over the right of the 1280px content column and cover text —
-`pointer-events: none` is what keeps that purely visual, so links underneath still work. It shows above `$large`
-(925px) and is hidden under `prefers-reduced-motion`, since a loop the viewer cannot pause is the entire point. Swap the
-clip by dropping a file in `images/brainrot/` and renaming it in the YAML; comment the key out to remove the panel.
-Keep the file **local and small** — it is served from this repo, and nothing on this site loads from another host.
+The panel is `position: fixed` in the **top right**, below the fixed masthead (`top: $masthead-height + 0.75em`, so
+it follows that constant if the masthead ever changes height) and at `z-index: 10`, under the masthead's 20. At 520px
+the first clip is deliberately big enough to spill over the right of the 1280px content column and cover text —
+`pointer-events: none` on the panel is what keeps that purely visual, so links underneath still work. It shows above
+`$large` (925px) and is hidden under `prefers-reduced-motion`, since a loop the viewer cannot pause is the entire
+point. Add a clip by dropping a file in `images/brainrot/` and appending an entry; keep the files **local and small**
+— they are served from this repo, and nothing on this site loads from another host.
+
+`images/brainrot/cat.gif` was a 1000×1000 green-screen GIF, 8.3MB. It was resized to 300px and had the green keyed
+out to real GIF transparency frame by frame with Pillow (a throwaway script, not kept: convert each frame to RGBA,
+zero the alpha where `g > 90 && g > 1.35r && g > 1.35b`, quantize to 127 colours, reserve index 255 as the
+transparency index, save with `disposal=2`). That is what `cutout: true` exists for. Do the same to any other
+green-screen clip rather than shipping the green.
 
 **Attribution still applies here.** The `background-stanford` translation keeps the "team projects I was part of"
 framing for the 3D-printed devices and AVATAR 2.0 (see **Content** above) — do not let a punchier rewrite turn those

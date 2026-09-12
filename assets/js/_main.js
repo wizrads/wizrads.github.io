@@ -180,28 +180,39 @@ function setupBrainrot() {
     }
   });
 
-  /* The looping clip in the right gutter. Absent unless gif: is set in
-     _data/brainrot.yml, and dropped on the floor if the file 404s, so a
-     missing or renamed file leaves the page exactly as it was. */
-  const gif = document.getElementById("brainrot-gif");
-  const gifMedia = gif && gif.querySelector(".brainrot-gif__media");
-  if (gifMedia) {
-    gifMedia.addEventListener("error", function () {
-      gif.remove();
+  /* The looping clips down the right of the page. Absent unless gifs: is set
+     in _data/brainrot.yml. A file that 404s takes only its own clip with it,
+     and the panel goes when the last one does, so a missing or renamed file
+     leaves the page exactly as it was. */
+  const gifPanel = document.getElementById("brainrot-gif");
+  const gifMedia = gifPanel
+    ? Array.prototype.slice.call(gifPanel.querySelectorAll(".brainrot-gif__media"))
+    : [];
+  gifMedia.forEach(function (media) {
+    media.addEventListener("error", function () {
+      media.remove();
+      if (!gifPanel.querySelector(".brainrot-gif__media")) {
+        gifPanel.remove();
+      }
     });
-  }
+  });
 
   function renderBrainrot(on) {
     swaps.forEach(function (swap) {
       swap.element.innerHTML = on ? swap.brainrot : swap.plain;
     });
-    if (gif && gif.isConnected) {
-      /* Only fetch the file once someone actually asks for it, so the homepage
-         costs nothing extra for everyone who leaves the toggle alone. */
-      if (on && !gifMedia.getAttribute("src")) {
-        gifMedia.setAttribute("src", gifMedia.getAttribute("data-src"));
+    if (gifPanel && gifPanel.isConnected) {
+      /* Only fetch the files once someone actually asks for them, so the
+         homepage costs nothing extra for everyone who leaves the toggle
+         alone. */
+      if (on) {
+        gifMedia.forEach(function (media) {
+          if (!media.getAttribute("src")) {
+            media.setAttribute("src", media.getAttribute("data-src"));
+          }
+        });
       }
-      gif.hidden = !on;
+      gifPanel.hidden = !on;
     }
     /* The greedy nav caches the width of every label and the masthead reserves
        a fixed height, so make it re-measure - but only once the new labels have
