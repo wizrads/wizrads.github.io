@@ -59,6 +59,12 @@ choked on it and the deploy failed while `jekyll build` stayed clean; it is now 
 new Markdown at the repo root needs front matter, an `exclude:` entry, or no Liquid braces. If a push does not show
 up on the live site, check `gh run list --repo wizrads/wizrads.github.io`, not just the build status.
 
+**Do not trust the commit SHA either endpoint reports.** Pages builds the branch *tip at run time*, so a run
+triggered by one commit happily deploys a later one while still labelling itself with the older SHA - push twice in
+quick succession and the second commit deploys with no run of its own, and `pages/builds/latest` keeps naming the
+first. Verify a deploy by its *content*: build locally and compare, e.g.
+`curl -s https://joeyschulz.com/assets/css/main.css | shasum -a 256` against `_site/assets/css/main.css`.
+
 ## Content
 
 All template placeholder content is gone. `_config.yml`, `_pages/about.md`, `_pages/cv.md`, and the `_publications`
