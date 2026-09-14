@@ -60,6 +60,24 @@ If you do end up checking against live assets, the fallback is to prove they mat
 There is no test suite. CI is `.github/workflows/jekyll-build.yml`, but it triggers on branch `main` while this repo
 uses `master`, so it never actually runs. Verify builds locally.
 
+**Production compresses the HTML; development does not — so test inline JavaScript against a production build.**
+`layout: compress` runs on every page and `compress_html.ignore.envs` is `development`, which is what `jekyll serve`
+sets. It used to collapse every whitespace run outside `<pre>` (Liquid's `split: " "` is Ruby's whitespace-run split,
+so **newlines went too**), which silently turned any `//` comment in an inline `<script>` into one that swallowed the
+rest of the file — the chart script in the blog post shipped as `SyntaxError: Unexpected end of input`, so nothing on
+the page ran, while `jekyll serve` looked perfect. `compress_html.blanklines: true` in `_config.yml` now keeps the
+newlines; **do not remove it**, and prefer `/* */` in inline scripts anyway.
+
+Checking that a production build's JSON still parses is not enough — the script has to run. Serve the compressed
+output and load it:
+
+```bash
+JEKYLL_ENV=production bundle exec jekyll serve -H localhost -P 4001 --config _config.yml,_config_docker.yml --no-watch
+```
+
+A quick syntax check of any page's inline script, local or live, is worth doing too — extract between the last
+`<script>` and its `</script>` and run `node --check` on it.
+
 **A green local build does not guarantee a green Pages build.** GitHub Pages force-enables
 `jekyll-optional-front-matter`, which turns *every* front-matter-less `.md` file in the repo into a page and runs it
 through Liquid — local Jekyll does not, and copies those files verbatim. `CLAUDE.md` quotes `{{` and `{%`, so Pages
