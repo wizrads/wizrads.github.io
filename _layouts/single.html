@@ -55,7 +55,7 @@ layout: default
       {% endunless %}
 
       <section class="page__content" itemprop="text">
-        {% if brainrot_copy %}{% include brainrot-toggle.html copy=brainrot_copy hint=brainrot_copy.hint %}{% endif %}
+        {% assign brainrot_page_gifs = false %}{% if brainrot_copy.gifs %}{% assign brainrot_page_gifs = true %}{% endif %}{% if brainrot_copy %}{% include brainrot-toggle.html copy=brainrot_copy hint=brainrot_copy.hint gifs=brainrot_page_gifs %}{% endif %}
         {{ content }}
 
         {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}

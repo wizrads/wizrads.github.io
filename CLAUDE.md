@@ -156,10 +156,12 @@ moving parts:
   `{: data-brainrot="intro-lab"}` on the line after it. `{:` is not Liquid, so it survives the build; the IAL does
   not disturb the heading ids `auto_ids` generates. The bullets are tagged as **one** list (`research-list`), so
   that translation supplies all four `<li>` elements.
-- `_includes/brainrot-toggle.html` — the switch plus `<script type="application/json" id="brainrot-data">`. It takes
-  `copy=` (the block of page text to use, defaulting to `site.data.brainrot`) and an optional `hint=`, and hand-builds
-  that JSON as `{page: copy.page, nav: …, bio: …}` rather than jsonifying one file, which is what lets a post supply
-  its own `page:` while still sharing the nav and bio. `about.md` includes it itself, at the top of the file.
+- `_includes/brainrot-toggle.html` — the switches plus `<script type="application/json" id="brainrot-data">`. It takes
+  `copy=` (the block of page text to use, defaulting to `site.data.brainrot`), an optional `hint=`, and `gifs=`, and
+  hand-builds that JSON as `{page: copy.page, nav: …, bio: …}` rather than jsonifying one file, which is what lets a
+  post supply its own `page:` while still sharing the nav and bio. `about.md` includes it itself, at the top of the
+  file. **Each switch is wrapped in its own `.brainrot__switch`**, because the checked styles are sibling selectors
+  off the input and two inputs under one parent light up every label in it.
 - `setupBrainrot()` in `assets/js/_main.js` (styles in `_sass/include/_brainrot.scss`) — reads that JSON, stores each
   element's real `innerHTML`, and swaps. It returns immediately when the include is absent, so every other page is
   untouched. The state persists in `localStorage.brainrot`, so the toggle stays on across pages that have one.
@@ -170,8 +172,13 @@ moving parts:
 map, tag the post's blocks with `data-brainrot="key"` in their opening tags, and that is the whole wiring — nothing
 in the post's front matter, no include, no JS. `posttitle` is the one reserved key: the layout puts
 `data-brainrot="posttitle"` on the `<h1>` only when the file defines it, so the front-matter title translates too.
-`hint:` at the top level of the file replaces the toggle's "translate this page into Gen Alpha" line. The lookup is
-by slug, so it works for any page on the `single` layout, not only posts.
+`hint:` at the top level of the file replaces the toggle's "translate this page into Gen Alpha" line, and `gifs: true`
+opts the post into the gutter clips (see below — they are **off** on posts otherwise). The lookup is by slug, so it
+works for any page on the `single` layout, not only posts.
+
+`_data/brainrot_posts/ask-eight-llms.yml` is the worked example, and its register is the one to match: all lowercase,
+heavy slang, several emoji a paragraph. The homepage's copy in `_data/brainrot.yml` is milder — it was written first
+and has not been brought up to the same level.
 
 Translate prose, never a quotation. `_data/brainrot_posts/ask-eight-llms.yml` deliberately leaves the prompt box,
 Grok's refusal, the model tables and every `figcaption` alone — those are records of what was actually asked and
@@ -197,8 +204,20 @@ Emoji are plain characters in the YAML, rendered by the system emoji font, so no
 cat, and the Rizzler — stacked down the right of the page while the toggle is on, the gameplay half of a brainrot
 TikTok. Each entry takes `src` (site-relative path) and an optional `width` (default 520px). The
 `<aside id="brainrot-gif">` renders only when the list is non-empty, `renderBrainrot()` shows and hides it, and each
-`src` is copied from `data-src` the *first* time the toggle goes on (and the `data-src` cleared, which is what makes
-that run once), so nothing is fetched for anyone who leaves brainrot mode alone. There is no `error` handling: a
+`src` is copied from `data-src` the *first* time a clip is actually shown (and the `data-src` cleared, which is what
+makes that run once), so nothing is fetched for anyone who never turns them on.
+
+**They are on for the homepage and off for blog posts.** The include's `gifs=` defaults to on, which is what
+`about.md` gets; `single.html` passes `false` unless the post's data file sets `gifs: true`. Both ends compare
+against `false` **explicitly** rather than using Liquid's `default` filter, which treats `false` as "not set" and
+would switch them straight back on. With `gifs=false` neither the panel nor its switch is rendered at all.
+
+**And each viewer can switch them off for themselves.** A second toggle, `clips 🎬`, sits beside the brainrot one
+wherever the panel exists, and `renderBrainrot()` reveals it only while brainrot mode is on. The preference is
+`localStorage.brainrotGifs`, so it is per browser: switching the clips off changes nothing for anyone else, and the
+clip files are never fetched while it is off. Note `.brainrot__switch[hidden] { display: none }` in
+`_sass/include/_brainrot.scss` — the same trap as the panel below, since `.brainrot__switch`'s own `display:
+inline-flex` beats the browser's `[hidden]` rule and the switch would otherwise show with brainrot mode off. There is no `error` handling: a
 `src` naming a file that is not there shows a broken-image icon, so keep the list and `images/brainrot/` in sync.
 
 The panel is `position: fixed` in the **top right**, below the fixed masthead (`top: $masthead-height + 0.75em`, so

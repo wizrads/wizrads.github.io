@@ -7,10 +7,26 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.5em 1.25em;
   margin: 0 0 1.5em;
   font-family: $sans-serif;
   font-size: $type-size-6;
+}
+
+/* One wrapper per switch. The checked styles below are sibling selectors off
+   the input, so two inputs sharing a parent would light up every label in it. */
+.brainrot__switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+}
+
+/* Both states spelled out for the same reason the clip panel needs it: the
+   author rule above beats the browser's own [hidden] { display: none }, so the
+   clips switch would stay visible while brainrot mode is off. */
+.brainrot__switch[hidden] {
+  display: none;
 }
 
 /* Kept in the tab order and reachable by screen readers, just not painted. */

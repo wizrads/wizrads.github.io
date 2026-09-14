@@ -7,26 +7,52 @@
      by slug and includes automatically - so a post gets a slider by having a
      data file and nothing else.
 
-     nav:, bio: and gifs: always come from /_data/brainrot.yml. They are site
-     furniture rather than page copy, so every page translates them the same
+     gifs= renders the gutter clips. It defaults to on, which is the homepage;
+     single.html passes false unless a post's data file sets gifs: true, so the
+     clips stay off blog posts by default. Compared against false explicitly
+     because Liquid's default filter treats false as "not set" and would turn
+     them back on.
+
+     nav:, bio: and the clip list always come from /_data/brainrot.yml. They are
+     site furniture rather than page copy, so every page translates them the same
      way and a post's file only has to carry that post's own text. -->
 {% assign brainrot_copy = include.copy | default: site.data.brainrot %}
+{% assign brainrot_gifs = true %}
+{% if include.gifs == false %}{% assign brainrot_gifs = false %}{% endif %}
+{% if site.data.brainrot.gifs == nil %}{% assign brainrot_gifs = false %}{% endif %}
 <div class="brainrot">
-  <input type="checkbox" id="brainrot-toggle" class="brainrot__input">
-  <label class="brainrot__label" for="brainrot-toggle">
-    <span class="brainrot__track" aria-hidden="true"><span class="brainrot__knob"></span></span>
-    <span class="brainrot__text">brainrot mode 🧠</span>
-  </label>
-  <span class="brainrot__hint" aria-hidden="true">
-    <span class="brainrot__hint--off">{{ include.hint | default: "translate this page into Gen Alpha ✨" }}</span>
-    <span class="brainrot__hint--on">it's giving skibidi. you did this. 💀</span>
+  <!-- Each switch is its own wrapper because the checked styles are sibling
+       selectors off the input; two inputs under one parent would both light up
+       every label. -->
+  <span class="brainrot__switch">
+    <input type="checkbox" id="brainrot-toggle" class="brainrot__input">
+    <label class="brainrot__label" for="brainrot-toggle">
+      <span class="brainrot__track" aria-hidden="true"><span class="brainrot__knob"></span></span>
+      <span class="brainrot__text">brainrot mode 🧠</span>
+    </label>
+    <span class="brainrot__hint" aria-hidden="true">
+      <span class="brainrot__hint--off">{{ include.hint | default: "translate this page into Gen Alpha ✨" }}</span>
+      <span class="brainrot__hint--on">it's giving skibidi. you did this. 💀</span>
+    </span>
   </span>
+  {% if brainrot_gifs %}
+  <!-- The viewer's own switch for the clips, revealed by the JS once brainrot
+       mode is on. The preference lives in localStorage, so turning them off is
+       personal to that browser and changes nothing for anyone else. -->
+  <span class="brainrot__switch brainrot__switch--gifs" hidden>
+    <input type="checkbox" id="brainrot-gifs" class="brainrot__input" checked>
+    <label class="brainrot__label" for="brainrot-gifs">
+      <span class="brainrot__track" aria-hidden="true"><span class="brainrot__knob"></span></span>
+      <span class="brainrot__text">clips 🎬</span>
+    </label>
+  </span>
+  {% endif %}
 </div>
-{% if site.data.brainrot.gifs %}
+{% if brainrot_gifs %}
 <!-- The looping clips that stack down the right of the page while brainrot
      mode is on. Hidden until the toggle is flipped, and each one is dropped if
      its file is missing. The list comes from gifs: in /_data/brainrot.yml, and
-     the files are only fetched the first time the toggle goes on.
+     the files are only fetched the first time they are actually shown.
 
      Each clip is sized with max-width/max-height only, never width - that is
      what lets the browser scale it by its own aspect ratio. The 42vw in the

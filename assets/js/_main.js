@@ -180,25 +180,40 @@ function setupBrainrot() {
     }
   });
 
-  /* The looping clips down the right of the page, absent unless gifs: is set
-     in _data/brainrot.yml. */
+  /* The looping clips down the right of the page, and the viewer's own switch
+     for them. Both are absent on a page the include rendered without them - the
+     homepage has them, a blog post only if its data file asks. The preference
+     is per browser (localStorage.brainrotGifs), so switching the clips off is
+     personal and changes nothing for anyone else. */
   const gifPanel = document.getElementById("brainrot-gif");
+  const gifSwitch = document.getElementById("brainrot-gifs");
+  const gifRow = document.querySelector(".brainrot__switch--gifs");
+  let gifsWanted = localStorage.getItem("brainrotGifs") !== "off";
+  if (gifSwitch) {
+    gifSwitch.checked = gifsWanted;
+  }
 
   function renderBrainrot(on) {
     swaps.forEach(function (swap) {
       swap.element.innerHTML = on ? swap.brainrot : swap.plain;
     });
     if (gifPanel) {
-      /* Each clip's src is only filled in the first time the toggle goes on,
-         so the homepage costs nothing extra for everyone who leaves it alone.
+      const showGifs = on && gifsWanted;
+      /* Each clip's src is only filled in the first time it is actually shown,
+         so the page costs nothing extra for everyone who leaves the clips off.
          Clearing data-src is what makes this run once per clip. */
-      if (on) {
+      if (showGifs) {
         gifPanel.querySelectorAll("[data-src]").forEach(function (media) {
           media.src = media.dataset.src;
           media.removeAttribute("data-src");
         });
       }
-      gifPanel.hidden = !on;
+      gifPanel.hidden = !showGifs;
+    }
+    /* No point offering the clips switch while the thing it controls cannot
+       be on anyway. */
+    if (gifRow) {
+      gifRow.hidden = !on;
     }
     /* The greedy nav caches the width of every label and the masthead reserves
        a fixed height, so make it re-measure - but only once the new labels have
@@ -213,6 +228,14 @@ function setupBrainrot() {
     localStorage.setItem("brainrot", toggle.checked ? "on" : "off");
     renderBrainrot(toggle.checked);
   });
+
+  if (gifSwitch) {
+    gifSwitch.addEventListener("change", function () {
+      gifsWanted = gifSwitch.checked;
+      localStorage.setItem("brainrotGifs", gifsWanted ? "on" : "off");
+      renderBrainrot(toggle.checked);
+    });
+  }
 
   if (localStorage.getItem("brainrot") === "on") {
     toggle.checked = true;
