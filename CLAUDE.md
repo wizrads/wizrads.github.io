@@ -40,10 +40,18 @@ docker compose up                                # containerized alternative (_c
 
 Editing `_config.yml` requires restarting Jekyll; Markdown/HTML changes hot-reload.
 
-**Always preview with `jekyll serve`, never by serving `_site/` with another static server.** `url` is
-`https://joeyschulz.com`, so a plain `jekyll build` bakes absolute production URLs into every asset link — the page
-then silently loads the *live* CSS and JS and your local changes appear to do nothing. `jekyll serve` rewrites `url`
-to the local address for the duration.
+**Always preview with `--config _config.yml,_config_docker.yml`.** `url` is `https://joeyschulz.com` and every
+asset link is built from it, so a preview without that override silently loads the *live* CSS and JS and your local
+changes appear to do nothing. **`jekyll serve` on its own does NOT rewrite `url` here** — it only does that when
+`url` is blank in the config, and this one is not. `_config_docker.yml` is a one-line `url: ""`, which is exactly
+that override; `.claude/launch.json` passes it. Confirm before trusting a preview:
+
+```bash
+curl -s http://localhost:4000/ | grep -o 'href="[^"]*main\.css"'   # must be /assets/..., not https://joeyschulz.com/...
+```
+
+If you do end up checking against live assets, the fallback is to prove they match what you built:
+`shasum -a 256 _site/assets/css/main.css` against `curl -s https://joeyschulz.com/assets/css/main.css | shasum -a 256`.
 
 **JavaScript is committed pre-built.** `main.min.js` is jquery + `plugins/jquery.greedy-navigation.js` + `_main.js` +
 `theme.js` uglified together, and it is the only script the site loads. After editing any of those sources, run
@@ -69,7 +77,8 @@ first. Verify a deploy by its *content*: build locally and compare, e.g.
 
 All template placeholder content is gone. `_config.yml`, `_pages/about.md`, `_pages/cv.md`, and the `_publications`
 (17), `_talks` (28), `_teaching` (2), and `_portfolio` (4) collections hold real content generated from Joey's CV.
-`_posts/` is empty and there is no blog. The nav is Publications / Talks / Teaching / Portfolio / Projects.
+`_posts/` holds one post (see **The blog** below). The nav is Blog / Publications / Talks / Teaching / Portfolio /
+Projects.
 
 **Dates are year-accurate only.** The CV supplies publication and meeting years but not days, so every generated file
 uses `YYYY-01-01`. Never present those days as real.
@@ -140,7 +149,8 @@ the nav labels revert when you navigate away.
 **The `nav:` translations have a width budget.** They are swapped in place, and a nav wide enough to wrap the site
 title grows the masthead past the `$masthead-height` the stylesheet reserves — the padding jump described below. Keep
 each translated label about as wide as the label it replaces (the emoji sit flush against the word for this reason:
-the space costs ~5px each) and check the total, which must stay under the plain nav's:
+the space costs ~5px each; Talks and Teaching became "Yaps" and "Teach" to pay for the Blog tab) and check the total,
+which must stay at or under the plain nav's:
 `document.querySelector("#site-nav .visible-links").getBoundingClientRect().width`. `renderBrainrot()` then triggers
 a `resize` on the **next animation frame** so the greedy nav re-measures a settled layout; triggering it in the same
 frame reads a stale masthead height and leaves the body padding a few pixels off.
@@ -185,6 +195,45 @@ green-screen clip rather than shipping the green.
 **Attribution still applies here.** The `background-stanford` translation keeps the "team projects I was part of"
 framing for the 3D-printed devices and AVATAR 2.0 (see **Content** above) — do not let a punchier rewrite turn those
 into things he led.
+
+### The blog
+
+`_posts/` has one post, `2026-09-14-ask-eight-llms.md`, served at **`/ask-eight-llms/`** — posts take
+`permalink: /:categories/:title/` from `_config.yml`, and it declares no categories. `_pages/year-archive.html`
+(`/year-archive/`) is the listing page and is the **Blog** nav tab.
+
+It arrived as a single self-contained 46KB HTML file (five hand-written SVG charts, an inline JSON data block, and
+~260 lines of vanilla JS) and was moved in without touching the charts. What that required, and what to repeat for
+the next one:
+
+- **Scope the CSS.** The original styled `:root` and bare `body`/`p`/`h2`/`figure`/`table`/`details` selectors, which
+  would fight the theme in both directions. Everything is wrapped in `<div class="llm-post">`, the `:root` variables
+  moved onto `.llm-post`, and every selector prefixed. The `<style>` lives inline in the post body, so it loads on
+  that page only and wins ties against `main.css` on source order — no `!important` anywhere.
+- **Undo what the theme paints.** Prefixing is not enough on its own, because the theme still reaches in through its
+  own selectors. A short reset block near the top of the post's stylesheet handles the four that actually broke
+  things: `figure{display:block}` (the theme makes figures flex, which scatters the chart parts across a row),
+  `figcaption{font-family:inherit;margin-bottom:0}`, `table{border:0}` + `thead{background-color:transparent}` +
+  `th,td{border-right:0}`, and `h2{padding-bottom:0;border-bottom:0}`.
+- **One title only.** The layout renders the front-matter title, so the in-body `<h1>` and its `.eyebrow` were
+  deleted and `header` lost its big top padding. The `.lede` and the conflict-of-interest callout stayed.
+- **Set `excerpt:` explicitly.** Without it the archive listing and the RSS summary take the first block, which here
+  is the opening `<div>` and the stylesheet.
+- **`feed: excerpt_only: true`.** jekyll-feed inlines full post content; for this post that meant a `<style>` block
+  and 260 lines of chart code in `feed.xml` (49KB) that no reader can run. The flag is read per-post at
+  `post.feed.excerpt_only`.
+- **Liquid.** The file had no `{{` or `{%`, so it passes through untouched. Check with `grep -c` after any edit and
+  wrap the script in `{% raw %}` if that ever changes.
+- **Web fonts are opt-in per page.** `_includes/head/custom.html` emits a stylesheet link only when a page sets
+  `google_fonts:` in its front matter, so the rest of the site still makes no request to Google.
+
+Known rough edges, both judgement calls rather than bugs:
+
+- **The charts are drawn for a ~1080px column and get ~670px** inside `single` with the author sidebar, so their
+  12px SVG labels render around 9–10px. Legible, checked, but smaller than designed. `author_profile: false` on the
+  post would buy the width back at the cost of the sidebar; the theme has no `classes: wide` support.
+- **The post is light-only on purpose** (`color-scheme: light only`), but the site *does* have a dark toggle. Flip
+  it and the post stays a white sheet inside a dark page. Adding dark variants was explicitly declined.
 
 ### Hidden pages
 
@@ -255,6 +304,14 @@ by accident.
   2px. **If you change the theme, the nav items, or the masthead's font/padding, re-measure and update both
   constants** (`document.querySelector('.masthead').getBoundingClientRect().height` at a wide and a narrow viewport).
   `$masthead-height-narrow` is declared with `!default` in `_sass/_themes.scss` so other themes still compile.
+- **The nav cannot overflow, so the site title wraps instead.** `.visible-links` is `display: table`, so it shrinks
+  to fit rather than exceeding the nav width — which means `updateNav()`'s `$vlinks.width() > availableSpace` test
+  never fires and items never move into the hamburger. What gives instead is the title, wrapping to two lines and
+  taking the masthead from 65px to 92px. With six nav items that now happens in a band roughly **790–850px wide**
+  (below ~768px the narrow masthead takes over and it is fine again). Adding a seventh item, or lengthening a label,
+  widens that band. A real fix means changing the list's layout model (`table-layout: fixed` plus `white-space:
+  nowrap` on the cells, or dropping `display: table`) and then re-measuring both height constants — `flex-wrap` does
+  nothing here, the list is not a flex container.
 - **`_includes/masthead.html`** — the nav's overflow button ships with `class="hidden"` (plus an `aria-label` it
   never had). Upstream rendered it visible and let the JS hide it, which flashed a hamburger on every page load.
 - **`_includes/author-profile.html`** — the avatar `<img>` must **not** carry `class="author__avatar"`; that class

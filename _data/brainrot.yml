@@ -32,9 +32,10 @@ bio: >
 # it (see "Local changes to theme files" in CLAUDE.md). Measure with
 # document.querySelector("#site-nav .visible-links").getBoundingClientRect().
 nav:
+  Blog: "Blog📝"
   Publications: "Bangers🔥"
-  Talks: "Yapping🗣️"
-  Teaching: "Teaching🎓"
+  Talks: "Yaps🗣️"
+  Teaching: "Teach🎓"
   Portfolio: "Folio📂"
   Projects: "Builds🛠️"
 

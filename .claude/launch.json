@@ -4,7 +4,16 @@
     {
       "name": "jekyll",
       "runtimeExecutable": "bundle",
-      "runtimeArgs": ["exec", "jekyll", "serve", "-l", "-H", "localhost"],
+      "runtimeArgs": [
+        "exec",
+        "jekyll",
+        "serve",
+        "-l",
+        "-H",
+        "localhost",
+        "--config",
+        "_config.yml,_config_docker.yml"
+      ],
       "port": 4000
     }
   ]
