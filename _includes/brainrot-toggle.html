@@ -1,6 +1,16 @@
-<!-- Gen Alpha translation toggle. The alternate copy lives in
-     /_data/brainrot.yml and is swapped in by setupBrainrot() in
-     /assets/js/_main.js, which does nothing unless this include is present. -->
+<!-- Gen Alpha translation toggle, swapped in by setupBrainrot() in
+     /assets/js/_main.js, which does nothing unless this include is present.
+
+     copy= is the block of alternate text this page uses. Omit it and the page
+     gets the homepage's, /_data/brainrot.yml. Blog posts pass their own file
+     from /_data/brainrot_posts/<slug>.yml, which _layouts/single.html looks up
+     by slug and includes automatically - so a post gets a slider by having a
+     data file and nothing else.
+
+     nav:, bio: and gifs: always come from /_data/brainrot.yml. They are site
+     furniture rather than page copy, so every page translates them the same
+     way and a post's file only has to carry that post's own text. -->
+{% assign brainrot_copy = include.copy | default: site.data.brainrot %}
 <div class="brainrot">
   <input type="checkbox" id="brainrot-toggle" class="brainrot__input">
   <label class="brainrot__label" for="brainrot-toggle">
@@ -8,7 +18,7 @@
     <span class="brainrot__text">brainrot mode 🧠</span>
   </label>
   <span class="brainrot__hint" aria-hidden="true">
-    <span class="brainrot__hint--off">translate this page into Gen Alpha ✨</span>
+    <span class="brainrot__hint--off">{{ include.hint | default: "translate this page into Gen Alpha ✨" }}</span>
     <span class="brainrot__hint--on">it's giving skibidi. you did this. 💀</span>
   </span>
 </div>
@@ -33,4 +43,6 @@
   {% endfor %}
 </aside>
 {% endif %}
-<script type="application/json" id="brainrot-data">{{ site.data.brainrot | jsonify }}</script>
+<!-- Assembled by hand rather than jsonified whole, because page: comes from
+     this page's own file while nav:/bio: always come from the site-wide one. -->
+<script type="application/json" id="brainrot-data">{"page":{{ brainrot_copy.page | jsonify }},"nav":{{ site.data.brainrot.nav | jsonify }},"bio":{{ site.data.brainrot.bio | jsonify }}}</script>

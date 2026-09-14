@@ -145,24 +145,42 @@ employers — keep it that way if the data is ever extended.
 
 ### Brainrot mode (the Gen Alpha toggle)
 
-The homepage carries a joke switch that swaps its copy for a Gen Alpha translation. Four moving parts:
+The homepage and each blog post can carry a joke switch that swaps the copy for a Gen Alpha translation. Four
+moving parts:
 
-- `_data/brainrot.yml` — the alternate copy: `page:` (keyed by block), `nav:` (keyed by rendered nav label), `bio:`.
-  Values are injected as HTML, so a translation must carry over any links the real copy had.
-  `gifs:` is the odd one out: the list of looping clips described below, not copy.
+- `_data/brainrot.yml` — the homepage's alternate copy: `page:` (keyed by block), `nav:` (keyed by rendered nav
+  label), `bio:`. Values are injected as HTML, so a translation must carry over any links the real copy had.
+  `gifs:` is the odd one out: the list of looping clips described below, not copy. `nav:`, `bio:` and `gifs:` are
+  **site furniture** — every page with a toggle gets them from this file, whatever its own copy is.
 - `_pages/about.md` — each translatable block is tagged with a kramdown inline attribute list,
   `{: data-brainrot="intro-lab"}` on the line after it. `{:` is not Liquid, so it survives the build; the IAL does
   not disturb the heading ids `auto_ids` generates. The bullets are tagged as **one** list (`research-list`), so
   that translation supplies all four `<li>` elements.
-- `_includes/brainrot-toggle.html` — the switch plus `<script type="application/json" id="brainrot-data">`, which is
-  just `site.data.brainrot | jsonify`. Included at the top of `about.md`.
+- `_includes/brainrot-toggle.html` — the switch plus `<script type="application/json" id="brainrot-data">`. It takes
+  `copy=` (the block of page text to use, defaulting to `site.data.brainrot`) and an optional `hint=`, and hand-builds
+  that JSON as `{page: copy.page, nav: …, bio: …}` rather than jsonifying one file, which is what lets a post supply
+  its own `page:` while still sharing the nav and bio. `about.md` includes it itself, at the top of the file.
 - `setupBrainrot()` in `assets/js/_main.js` (styles in `_sass/include/_brainrot.scss`) — reads that JSON, stores each
   element's real `innerHTML`, and swaps. It returns immediately when the include is absent, so every other page is
-  untouched. The state persists in `localStorage.brainrot`.
+  untouched. The state persists in `localStorage.brainrot`, so the toggle stays on across pages that have one.
+
+**Giving a blog post a slider is one file.** `_layouts/single.html` looks up
+`site.data.brainrot_posts[page.slug]`, and where that file exists it renders the toggle at the top of
+`.page__content` and passes the file in as `copy=`. So: add `_data/brainrot_posts/<post-slug>.yml` with a `page:`
+map, tag the post's blocks with `data-brainrot="key"` in their opening tags, and that is the whole wiring — nothing
+in the post's front matter, no include, no JS. `posttitle` is the one reserved key: the layout puts
+`data-brainrot="posttitle"` on the `<h1>` only when the file defines it, so the front-matter title translates too.
+`hint:` at the top level of the file replaces the toggle's "translate this page into Gen Alpha" line. The lookup is
+by slug, so it works for any page on the `single` layout, not only posts.
+
+Translate prose, never a quotation. `_data/brainrot_posts/ask-eight-llms.yml` deliberately leaves the prompt box,
+Grok's refusal, the model tables and every `figcaption` alone — those are records of what was actually asked and
+answered, and a punchier wording would make them wrong. Same rule as the attribution one below: carry every number
+through unchanged.
 
 A block whose text is rewritten but whose key is left in place still renders fine — it just stops translating, so
-**editing the real copy can never break the page**. Keep the two in sync by hand. Only the homepage is translated, so
-the nav labels revert when you navigate away.
+**editing the real copy can never break the page**. Keep the two in sync by hand. Pages with no data file are
+untouched, so the nav labels revert when you navigate to one.
 
 **The `nav:` translations have a width budget.** They are swapped in place, and a nav wide enough to wrap the site
 title grows the masthead past the `$masthead-height` the stylesheet reserves — the padding jump described below. Keep
@@ -245,6 +263,12 @@ the next one:
   wrap the script in `{% raw %}` if that ever changes.
 - **Web fonts are opt-in per page.** `_includes/head/custom.html` emits a stylesheet link only when a page sets
   `google_fonts:` in its front matter, so the rest of the site still makes no request to Google.
+- **Give it a brainrot slider.** Tag the post's prose in the opening tags (`<p data-brainrot="worth-1">`) and add
+  `_data/brainrot_posts/<slug>.yml`; the toggle then appears under the title on its own. See **Brainrot mode**
+  above. The swap is `innerHTML` on the tagged elements only, so nothing the chart script draws into (`#c-*`,
+  `#t-*`, `#lineup`, `#settings`) may be tagged — and nothing here listens for `resize`, which
+  `renderBrainrot()` fires, so the charts survive the toggle untouched. Verified by clicking it in a production
+  build: five SVGs before, during and after.
 
 Known rough edges, both judgement calls rather than bugs:
 

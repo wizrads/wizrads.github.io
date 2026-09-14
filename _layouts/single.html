@@ -4,6 +4,16 @@ layout: default
 
 {% include base_path %}
 
+{% comment %}
+  Brainrot slider. A page gets one by having a file at
+  /_data/brainrot_posts/<slug>.yml - no front matter, no include, nothing else.
+  That is what makes every future blog post able to carry the toggle: name the
+  data file after the post's slug and it appears. The homepage is the exception
+  and still includes the toggle itself, since it sits above the first paragraph
+  rather than under the title.
+{% endcomment %}
+{% assign brainrot_copy = site.data.brainrot_posts[page.slug] %}
+
 {% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
   {% include page__hero.html %}
 {% endif %}
@@ -26,7 +36,7 @@ layout: default
     <div class="page__inner-wrap">
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
-          {% if page.title %}<h1 class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
+          {% if page.title %}<h1 class="page__title" itemprop="headline"{% if brainrot_copy.page.posttitle %} data-brainrot="posttitle"{% endif %}>{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
           {% if page.read_time %}
             <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
           {% endif %}
@@ -45,6 +55,7 @@ layout: default
       {% endunless %}
 
       <section class="page__content" itemprop="text">
+        {% if brainrot_copy %}{% include brainrot-toggle.html copy=brainrot_copy hint=brainrot_copy.hint %}{% endif %}
         {{ content }}
 
         {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}

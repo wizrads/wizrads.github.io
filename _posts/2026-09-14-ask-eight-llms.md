@@ -149,21 +149,21 @@ google_fonts: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..14
 
 <div class="wrap">
 <header class="col">
-  <p class="lede">Everyone in this field gets asked which program is best, and everyone has an
+  <p class="lede" data-brainrot="lede">Everyone in this field gets asked which program is best, and everyone has an
   opinion. Nobody has a ranking. US News ranks law schools, business schools, hospitals and
   engineering departments, and skips graduate medical physics entirely. So I got curious and asked
   the machines.</p>
-  <p class="coi"><strong>Conflict of interest, stated up front:</strong> I am a PhD student at
+  <p class="coi" data-brainrot="coi"><strong>Conflict of interest, stated up front:</strong> I am a PhD student at
   Wisconsin, which finished first. Weigh everything below accordingly.</p>
 </header>
 
 <div class="col">
-<p>Rankings get made by people who pick the criteria, weight them, and publish the result.
+<p data-brainrot="intro-rankings">Rankings get made by people who pick the criteria, weight them, and publish the result.
 Medical physics never got that treatment. It is a small field, under a hundred accredited
 graduate programs in the United States, and no major outlet bothers to rank them. Applicants compare them by
 asking around, which is how I ended up with opinions of my own.</p>
 
-<p>Increasingly, applicants ask a chatbot instead. I wanted to know what it would tell them. So I
+<p data-brainrot="intro-ask">Increasingly, applicants ask a chatbot instead. I wanted to know what it would tell them. So I
 gave eight large language models, one from each major company, the same question in a fresh
 conversation with no memory of the last one:</p>
 
@@ -187,12 +187,12 @@ conversation with no memory of the last one:</p>
   </div>
 </div>
 
-<p>Ten times each. Eighty answers. Then two reworded versions and a pair asking specifically about
-master&rsquo;s and doctoral programs, for 320 answers in total. Every call went out one at a time.
-I logged each one, hashed the response, and checked which company&rsquo;s servers actually
-answered.</p>
+<p data-brainrot="intro-counts">Each model got that question ten times, which is eighty answers to that wording alone. Two
+rewordings of it, plus a version naming master&rsquo;s programs and one naming doctoral programs,
+brought the total to 320. The calls went out one at a time, and I logged every one with a hash of
+the response and a note of which company&rsquo;s servers had actually answered it.</p>
 
-<p>Here is the field. One model per company, pinned to an exact version and serving provider so
+<p data-brainrot="intro-lineup">Here is the field. One model per company, pinned to an exact version and serving provider so
 the same weights answered every time:</p>
 
 <div class="scroll"><table class="lineup" id="lineup"><thead><tr>
@@ -202,26 +202,26 @@ the same weights answered every time:</p>
 <th>Model</th><th>Endpoint</th><th>Temperature</th><th>Max tokens</th><th>Reasoning</th>
 </tr></thead><tbody></tbody></table></div>
 
-<p>Two of the eight will not accept a temperature setting at all, and four cannot switch their
+<p data-brainrot="intro-settings">Two of the eight will not accept a temperature setting at all, and four cannot switch their
 reasoning off, so those run at the lowest effort their provider allows. Holding every model to
 identical settings is impossible, so the table records what each one actually accepted.</p>
 
-<p>What comes back is a ranking. A confident one, with clear favourites and a sensible-looking
+<p data-brainrot="intro-what">What comes back is a ranking. A confident one, with clear favourites and a sensible-looking
 tail. The only question worth asking is what it is made of.</p>
 </div>
 
 <div class="col">
 <div class="hero-stat">
   <div class="num">0</div>
-  <div class="say">published rankings of US graduate medical physics programs existed before this
+  <div class="say" data-brainrot="herostat">published rankings of US graduate medical physics programs existed before this
   one. The models produced a top 15 anyway, and largely agreed with each other.</div>
 </div>
 </div>
 
 <section class="figwide">
   <figure>
-    <p class="figtitle">The consensus top 15</p>
-    <p class="figsub">Pooled across 8 models, 10 answers each. Every model gets one vote.</p>
+    <p class="figtitle" data-brainrot="fig-board-title">The consensus top 15</p>
+    <p class="figsub" data-brainrot="fig-board-sub">Pooled across 8 models, 10 answers each. Every model gets one vote.</p>
     <div class="legend">
       <span><i style="background:var(--yes)"></i>CAMPEP-accredited</span>
       <span><i style="background:var(--no)"></i>No accredited graduate program</span>
@@ -236,23 +236,23 @@ tail. The only question worth asking is what it is made of.</p>
 </section>
 
 <div class="col">
-<h2 class="kicker">The list holds up better than it should</h2>
-<p>Thirteen of the fifteen hold CAMPEP accreditation, which is the field&rsquo;s actual quality
+<h2 class="kicker" data-brainrot="h2-holds">The list holds up better than it should</h2>
+<p data-brainrot="holds-1">Thirteen of the fifteen hold CAMPEP accreditation, which is the field&rsquo;s actual quality
 bar and the closest thing to an answer key. Wisconsin, MD Anderson and Duke lead, and any medical
 physicist would put those three near the top of their own list. For a ranking assembled by next-token prediction, that is a respectable showing.</p>
 
-<p>Two do not belong. Michigan lands fifth and Harvard tenth, and neither appears on the CAMPEP
+<p data-brainrot="holds-2">Two do not belong. Michigan lands fifth and Harvard tenth, and neither appears on the CAMPEP
 graduate program list. Michigan showed up in 58 of 80 answers, so the models have settled on it.</p>
 
-<p>Across every answer the models named 59 distinct schools, and 35 of those hold no accredited
+<p data-brainrot="holds-3">Across every answer the models named 59 distinct schools, and 35 of those hold no accredited
 graduate program in the field. Most appear once or twice. The models know the top of the field well and
 improvise below it, which is roughly what a well-read undergraduate would do.</p>
 </div>
 
 <section class="figwide">
   <figure>
-    <p class="figtitle">Master&rsquo;s or doctoral? The models shrug</p>
-    <p class="figsub">All fifteen for each phrasing. Rank sits at the left of each row.</p>
+    <p class="figtitle" data-brainrot="fig-three-title">Master&rsquo;s or doctoral? The models shrug</p>
+    <p class="figsub" data-brainrot="fig-three-sub">All fifteen for each phrasing. Rank sits at the left of each row.</p>
     <div class="legend">
       <span><i style="background:var(--yes)"></i>Accredited graduate program, any degree</span>
       <span><i style="background:var(--no)"></i>No accredited graduate program</span>
@@ -279,13 +279,13 @@ improvise below it, which is roughly what a well-read undergraduate would do.</p
 </section>
 
 <div class="col">
-<h2 class="kicker">So where is it getting this?</h2>
-<p>Across the 79 graduate answers the models named 35 schools that hold no CAMPEP-accredited
+<h2 class="kicker" data-brainrot="h2-where">So where is it getting this?</h2>
+<p data-brainrot="where-1">Across the 79 graduate answers the models named 35 schools that hold no CAMPEP-accredited
 graduate program. That is a narrower claim than it sounds. CAMPEP accredits graduate programs,
 residencies and certificate programs on separate lists, and several of these schools run an
 accredited residency or certificate program. What none of them runs is an accredited graduate
 program, which is what the prompt asked for.</p>
-<p>Look at the list and the pattern is obvious. These are famous universities. The models appear to
+<p data-brainrot="where-2">Look at the list and the pattern is obvious. These are famous universities. The models appear to
 be reaching for general institutional reputation and letting it stand in for a field they have
 little specific information about, which is roughly what a well-read undergraduate would do when
 put on the spot.</p>
@@ -293,8 +293,8 @@ put on the spot.</p>
 
 <section class="figwide">
   <figure>
-    <p class="figtitle">Schools with no accredited GRADUATE program in medical physics</p>
-    <p class="figsub">Times named across the 79 graduate answers. Darker segment counts top-ten finishes.</p>
+    <p class="figtitle" data-brainrot="fig-notelig-title">Schools with no accredited GRADUATE program in medical physics</p>
+    <p class="figsub" data-brainrot="fig-notelig-sub">Times named across the 79 graduate answers. Darker segment counts top-ten finishes.</p>
     <div id="c-notelig"></div>
     <figcaption>Every one is a real, well-regarded university, and several run an accredited
     residency or certificate program in medical physics. What none of them runs is an accredited
@@ -306,8 +306,8 @@ put on the spot.</p>
 
 <section class="figwide">
   <figure>
-    <p class="figtitle">Rephrasing the question barely moves the needle</p>
-    <p class="figsub">Each answer hands out ten top-ten places. The share of them that went to a
+    <p class="figtitle" data-brainrot="fig-share-title">Rephrasing the question barely moves the needle</p>
+    <p class="figsub" data-brainrot="fig-share-sub">Each answer hands out ten top-ten places. The share of them that went to a
     school running no accredited graduate program.</p>
     <div id="c-share"></div>
     <figcaption>Read the top row like this: the graduate question drew 79 usable answers, so the
@@ -321,16 +321,16 @@ put on the spot.</p>
 </section>
 
 <div class="col">
-<h2 class="kicker">Do they agree with each other?</h2>
-<p>At the top, strongly. Wisconsin, MD Anderson and Duke clear nine of ten from almost every
+<h2 class="kicker" data-brainrot="h2-agree">Do they agree with each other?</h2>
+<p data-brainrot="agree-1">At the top, strongly. Wisconsin, MD Anderson and Duke clear nine of ten from almost every
 model. Past Chicago the grid breaks apart, and several schools survive on one model&rsquo;s
 enthusiasm. Gemini alone carries Johns Hopkins. DeepSeek alone carries UC Berkeley/UCSF.</p>
 </div>
 
 <section class="figwide">
   <figure>
-    <p class="figtitle">Who picked whom</p>
-    <p class="figsub">How many of each model&rsquo;s 10 answers put the school in its top ten.</p>
+    <p class="figtitle" data-brainrot="fig-heat-title">Who picked whom</p>
+    <p class="figsub" data-brainrot="fig-heat-sub">How many of each model&rsquo;s 10 answers put the school in its top ten.</p>
     <div class="legend">
       <span style="color:var(--ink-3)">0 of 10</span>
       <span><i style="background:var(--seq-1)"></i><i style="background:var(--seq-2)"></i><i style="background:var(--seq-3)"></i><i style="background:var(--seq-4)"></i><i style="background:var(--seq-5)"></i></span>
@@ -345,8 +345,8 @@ enthusiasm. Gemini alone carries Johns Hopkins. DeepSeek alone carries UC Berkel
 </section>
 
 <div class="col">
-<h2 class="kicker">One model refused to play</h2>
-<p>Grok answered the graduate question ten times. Nine times it produced a tidy list of fifteen
+<h2 class="kicker" data-brainrot="h2-refused">One model refused to play</h2>
+<p data-brainrot="refused-1">Grok answered the graduate question ten times. Nine times it produced a tidy list of fifteen
 schools. On the ninth attempt, same prompt and same settings, it stopped and said this:</p>
 
 <div class="pullquote">
@@ -358,40 +358,40 @@ schools. On the ninth attempt, same prompt and same settings, it stopped and sai
 <div class="tally" role="img" aria-label="Nine of ten answers listed fifteen schools; answer nine refused">
   <span class="ok">15</span><span class="ok">15</span><span class="ok">15</span><span class="ok">15</span><span class="ok">15</span><span class="ok">15</span><span class="ok">15</span><span class="ok">15</span><span class="no">no</span><span class="ok">15</span>
 </div>
-<p class="tally-cap">Grok&rsquo;s ten answers to the graduate question, in order.</p>
+<p class="tally-cap" data-brainrot="tally-cap">Grok&rsquo;s ten answers to the graduate question, in order.</p>
 
-<p>It declined twice more on master&rsquo;s and twice again on doctoral. Claude did something
+<p data-brainrot="refused-2">It declined twice more on master&rsquo;s and twice again on doctoral. Claude did something
 similar once on a reworded question, explaining at length that no such ranking exists in a form it
 could reproduce.</p>
 
-<p>Grok was right, which is the awkward part. There is no official ranking. Every list on this
+<p data-brainrot="refused-3">Grok was right, which is the awkward part. There is no official ranking. Every list on this
 page is fabricated in exactly the sense it meant. It just happened to be outvoted nine to one by
 its own other answers.</p>
 </div>
 
 <div class="col">
-<h2 class="kicker">So what is this worth?</h2>
-<p>About as much as any ranking, which is the honest answer. Every ranking you have read was
+<h2 class="kicker" data-brainrot="h2-worth">So what is this worth?</h2>
+<p data-brainrot="worth-1">About as much as any ranking, which is the honest answer. Every ranking you have read was
 somebody choosing criteria and weights. This one is eight language models averaging whatever they
 absorbed about American universities, with no criteria at all. The exact prompt, the exact model
 versions, the exact date and the raw counts are all here, so you can see how the sausage got made.
 Most rankings do not offer that.</p>
 
-<p>The reason it matters is that this is plausibly how a lot of applicants will shortlist programs
+<p data-brainrot="worth-2">The reason it matters is that this is plausibly how a lot of applicants will shortlist programs
 from here on. Not by reading accreditation lists. By asking a chatbot, once, and taking the answer.
 Anyone who does that in medical physics gets Michigan fifth and Harvard tenth.</p>
 
-<p>Which would sting more if program rank were the thing that mattered. It mostly is not &mdash;
+<p data-brainrot="worth-3">Which would sting more if program rank were the thing that mattered. It mostly is not &mdash;
 and &ldquo;graduate&rdquo; is doing a lot of quiet work in that sentence, because it covers two
 degrees that get decided on completely different grounds.</p>
 
-<p>For a PhD, the department barely registers next to the person supervising it: what they
+<p data-brainrot="worth-4">For a PhD, the department barely registers next to the person supervising it: what they
 research, how they mentor, whether they have funding that will still be there in year four, whether
 you can stand working with them for five years. Two students in the same accredited department can
 have completely different educations depending on whose lab they join. No ranking captures that,
 and no language model can tell you who your advisor should be.</p>
 
-<p>A master&rsquo;s is a different question, and a harder one to put to a chatbot. It is a short
+<p data-brainrot="worth-5">A master&rsquo;s is a different question, and a harder one to put to a chatbot. It is a short
 professional degree pointed at a residency, so the things that decide whether it was worth it are
 mostly ones a ranking never sees. What does it cost, and is any of it funded or offset by a
 stipend? How much clinical time do you actually get, in whose clinic, and on whose machines? And
@@ -401,15 +401,15 @@ site: completion rates, and where their graduates went. Go read it. A program wh
 consistently match into residencies is telling you something a top-15 list cannot, and a program
 that is vague about it is telling you something too.</p>
 
-<p>So ask the chatbot if you like. Then go read the faculty pages, email a few of them, talk to
+<p data-brainrot="worth-6">So ask the chatbot if you like. Then go read the faculty pages, email a few of them, talk to
 their current students, and look up the placement numbers. That is the part that decides your
 degree.</p>
 
-<p>And yes, Wisconsin came first, and yes, I go here. I would have told you it belonged near the
+<p data-brainrot="worth-7">And yes, Wisconsin came first, and yes, I go here. I would have told you it belonged near the
 top before I ran any of this. That is exactly the problem with letting anyone, or anything, hand
 you a ranking.</p>
 
-<p class="foot">320 responses collected 14 September 2026 through OpenRouter, one call at a time,
+<p class="foot" data-brainrot="foot">320 responses collected 14 September 2026 through OpenRouter, one call at a time,
 with the model and serving provider verified on every call. Total cost, $1.28. Accreditation
 checked against the CAMPEP GRADUATE program list as published on the collection date, 62 programs.
 CAMPEP accredits residency and certificate programs on separate lists, which were not consulted, so

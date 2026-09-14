@@ -1,0 +1,223 @@
+# Brainrot mode for /ask-eight-llms/.
+#
+# The file name is the post's slug, and that is the whole wiring: _layouts/
+# single.html looks for _data/brainrot_posts/<slug>.yml and, where one exists,
+# renders the toggle above the post body. Nothing goes in the post's front
+# matter. Drop a file in here for the next post and it gets a slider too.
+#
+# page:      keys match data-brainrot="..." attributes on elements in the post.
+#            posttitle is the one reserved key - it swaps the <h1> the layout
+#            renders from the front-matter title. A key with no element, or an
+#            element with no key, is skipped, so editing the real copy can never
+#            break the page; that block just stops translating.
+# hint:      optional replacement for the toggle's "translate this page" hint.
+#
+# nav:, bio: and the gutter clips come from _data/brainrot.yml and are shared
+# by every page that has a toggle.
+#
+# Values are injected as HTML, so carry over any markup the real copy had.
+#
+# Deliberately NOT translated, because they are quotations of what actually
+# happened and a funnier wording would make them wrong: the prompt box, Grok's
+# refusal in the pull quote, the model lineup and settings tables, and every
+# figcaption (those are the methods notes for the charts). Every number that
+# survives into a translation below is the real one.
+
+hint: "translate this post into Gen Alpha ✨"
+
+page:
+  posttitle: "which med phys program is peak? I asked eight LLMs 🤖"
+
+  lede: >
+    Everyone in this field gets asked which program is the GOAT 🐐, and everyone
+    has takes. Nobody has an actual ranking. US News ranks law schools, business
+    schools, hospitals and engineering departments, and skips graduate medical
+    physics entirely 💀. So I got curious and asked the machines.
+
+  coi: >
+    <strong>Conflict of interest, said up front:</strong> I am a PhD student at
+    Wisconsin, which finished first 🥇. Weigh everything below accordingly.
+    Suspicious, I know.
+
+  intro-rankings: >
+    Rankings are just somebody picking the criteria, weighting them, and posting
+    the result. Medical physics never got that treatment. It is a small field,
+    under a hundred accredited graduate programs in the United States, and no
+    major outlet bothers to rank them. Applicants compare them by asking around,
+    which is how I ended up with opinions of my own 🤷.
+
+  intro-ask: >
+    Increasingly, applicants ask a chatbot instead. I wanted to know what it
+    would tell them. So I hit eight large language models, one from each major
+    company, with the same question in a fresh chat with zero memory of the last
+    one:
+
+  intro-counts: >
+    Ten runs per model, so eighty answers on that wording alone. Then two
+    rewordings, plus a master&rsquo;s version and a doctoral version, for 320
+    answers total 🧾. One call at a time, every one logged, response hashed, and
+    I checked whose servers actually picked up.
+
+  intro-lineup: >
+    Here is the lineup. One model per company, pinned to an exact version and
+    serving provider so the same weights answered every single time 🔒:
+
+  intro-settings: >
+    Two of the eight will not take a temperature setting at all, and four cannot
+    switch their reasoning off, so those ran at the lowest effort their provider
+    allows. Holding every model to identical settings is straight up impossible,
+    so the table logs what each one actually accepted. It is what it is 🤷.
+
+  intro-what: >
+    What comes back is a ranking. A confident one, clear favourites, respectable
+    looking tail. Only question that matters: what is it actually made of? 👀
+
+  herostat: >
+    published rankings of US graduate medical physics programs existed before
+    this one. The models produced a top 15 anyway, and largely agreed with each
+    other. Confidently incorrect behaviour 💀.
+
+  fig-board-title: "The consensus top 15 🏆"
+  fig-board-sub: "Pooled across 8 models, 10 answers each. One vote per model."
+
+  h2-holds: "The list is lowkey valid"
+
+  holds-1: >
+    Thirteen of the fifteen hold CAMPEP accreditation, which is the field&rsquo;s
+    actual quality bar and the closest thing to an answer key ✅. Wisconsin, MD
+    Anderson and Duke lead, and any medical physicist would put those three near
+    the top of their own list. For a ranking assembled by next-token prediction,
+    that is a respectable showing. Respect 🫡.
+
+  holds-2: >
+    Two do not belong. Michigan lands fifth and Harvard tenth, and neither
+    appears on the CAMPEP graduate program list ❌. Michigan showed up in 58 of
+    80 answers, so the models are locked in on it. Delusional, but committed.
+
+  holds-3: >
+    Across every answer the models named 59 distinct schools, and 35 of those
+    hold no accredited graduate program in the field. Most appear once or twice.
+    The models know the top of the field and then start freestyling 🎤, which is
+    roughly what a well-read undergraduate would do.
+
+  fig-three-title: "Master&rsquo;s or doctoral? The models are just vibing"
+  fig-three-sub: "All fifteen for each phrasing. Rank sits at the left of each row."
+
+  h2-where: "So where is it getting this? 🧐"
+
+  where-1: >
+    Across the 79 graduate answers the models named 35 schools that hold no
+    CAMPEP-accredited graduate program. Narrower claim than it sounds. CAMPEP
+    accredits graduate programs, residencies and certificate programs on separate
+    lists, and several of these schools run an accredited residency or
+    certificate program. What none of them runs is an accredited graduate
+    program, which is literally what the prompt asked for.
+
+  where-2: >
+    Look at the list and the pattern is obvious. These are famous universities
+    🏛️. The models are reaching for general institutional aura and letting it
+    stand in for a field they have little specific information about, which is
+    roughly what a well-read undergraduate would do when put on the spot.
+
+  fig-notelig-title: "Schools with no accredited GRADUATE program in medical physics"
+  fig-notelig-sub: "Times named across the 79 graduate answers. Darker segment counts top-ten finishes."
+
+  fig-share-title: "Rewording the question barely does anything"
+  fig-share-sub: >
+    Each answer hands out ten top-ten places. The share of them that went to a
+    school running no accredited graduate program.
+
+  h2-agree: "Do they agree with each other?"
+
+  agree-1: >
+    At the top, hard yes. Wisconsin, MD Anderson and Duke clear nine of ten from
+    almost every model. Past Chicago the grid falls apart, and several schools
+    survive on one model&rsquo;s personal agenda. Gemini alone carries Johns
+    Hopkins. DeepSeek alone carries UC Berkeley/UCSF. Solo carry 🎮.
+
+  fig-heat-title: "Who picked whom"
+  fig-heat-sub: "How many of each model&rsquo;s 10 answers put the school in its top ten."
+
+  h2-refused: "One model refused to play 🚫"
+
+  refused-1: >
+    Grok answered the graduate question ten times. Nine times it produced a tidy
+    list of fifteen schools. On the ninth attempt, same prompt and same settings,
+    it stopped and said this:
+
+  tally-cap: "Grok&rsquo;s ten answers to the graduate question, in order."
+
+  refused-2: >
+    It declined twice more on master&rsquo;s and twice again on doctoral. Claude
+    did something similar once on a reworded question, explaining at length that
+    no such ranking exists in a form it could reproduce.
+
+  refused-3: >
+    Grok was right, which is the awkward part 😬. There is no official ranking.
+    Every list on this page is fabricated in exactly the sense it meant. It just
+    happened to get outvoted nine to one by its own other answers.
+
+  h2-worth: "So what is this even worth?"
+
+  worth-1: >
+    About as much as any ranking, which is the honest answer. Every ranking you
+    have read was somebody choosing criteria and weights. This one is eight
+    language models averaging whatever they absorbed about American universities,
+    with no criteria at all. The exact prompt, the exact model versions, the exact
+    date and the raw counts are all right here, so you can see how the sausage got
+    made 🌭. Most rankings do not offer that.
+
+  worth-2: >
+    Why it matters: this is plausibly how a lot of applicants will shortlist
+    programs from here on. Not by reading accreditation lists. By asking a
+    chatbot, once, and taking the answer. Anyone who does that in medical physics
+    gets Michigan fifth and Harvard tenth 💀.
+
+  worth-3: >
+    Which would sting more if program rank were the thing that mattered. It
+    mostly is not &mdash; and &ldquo;graduate&rdquo; is doing a lot of quiet work
+    in that sentence, because it covers two degrees that get decided on completely
+    different grounds.
+
+  worth-4: >
+    For a PhD, the department barely registers next to the person supervising it:
+    what they research, how they mentor, whether they have funding that will still
+    be there in year four, whether you can stand working with them for five years
+    😅. Two students in the same accredited department can have completely
+    different educations depending on whose lab they join. No ranking captures
+    that, and no language model can tell you who your advisor should be.
+
+  worth-5: >
+    A master&rsquo;s is a different question, and a harder one to put to a
+    chatbot. It is a short professional degree pointed at a residency, so the
+    things that decide whether it was worth it are mostly ones a ranking never
+    sees. What does it cost, and is any of it funded or offset by a stipend? How
+    much clinical time do you actually get, in whose clinic, and on whose
+    machines? And above all, where did recent cohorts end up 👀 &mdash; because in
+    this field the residency match is the bottleneck, not the degree. Most
+    accredited programs publish outcome data somewhere on their own site:
+    completion rates, and where their graduates went. Go read it. A program whose
+    graduates consistently match into residencies is telling you something a
+    top-15 list cannot, and a program that is vague about it is telling you
+    something too.
+
+  worth-6: >
+    So ask the chatbot if you like. Then go read the faculty pages, email a few
+    of them, talk to their current students, and look up the placement numbers.
+    That is the part that actually decides your degree 🎓.
+
+  worth-7: >
+    And yes, Wisconsin came first, and yes, I go here 🦡. I would have told you it
+    belonged near the top before I ran any of this. Which is exactly the problem
+    with letting anyone, or anything, hand you a ranking.
+
+  foot: >
+    320 responses collected 14 September 2026 through OpenRouter, one call at a
+    time, with the model and serving provider verified on every call. Total cost,
+    $1.28 💸. Accreditation checked against the CAMPEP GRADUATE program list as
+    published on the collection date, 62 programs. CAMPEP accredits residency and
+    certificate programs on separate lists, which were not consulted, so
+    &ldquo;no accredited graduate program&rdquo; never means a school has no
+    accredited program of any kind. School names were reconciled by hand, because
+    automated matching tried to merge the University of Iowa with the University
+    of Miami 💀.
