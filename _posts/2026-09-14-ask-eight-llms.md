@@ -460,8 +460,8 @@ Iowa with the University of Miami.</p>
       document.getElementById(s.id).addEventListener('click',function(){ stop(); paint(j); });
     });
     function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-    // Cycles on its own so the single-word difference is obvious at a glance, and stops
-    // the moment a reader takes control.
+    /* Cycles on its own so the single-word difference is obvious at a glance,
+       and stops the moment a reader takes control. */
     if(!reduce) timer=setInterval(function(){ paint((i+1)%steps.length); }, 2600);
     paint(0);
   })();
@@ -594,7 +594,7 @@ Iowa with the University of Miami.</p>
       var cx=padL+j*cw+cw/2;
       var e=el('text',{x:cx, y:padT-10, class:'axlab','text-anchor':'start',
         transform:'rotate(-42 '+cx+' '+(padT-10)+')'});
-      // Short forms on the axis; the lineup table and the tooltips carry the full names.
+      /* Short forms on the axis; the lineup table and the tooltips carry the full names. */
       e.appendChild(txt((H0.axis && H0.axis[j]) || m)); svg.appendChild(e);
     });
     progs.forEach(function(p,i){
@@ -602,8 +602,8 @@ Iowa with the University of Miami.</p>
       var nm=el('text',{x:padL-12,y:y+ch/2+4,class:'namelab','text-anchor':'end',fill:'var(--ink)'});
       nm.appendChild(txt(p)); svg.appendChild(nm);
       if (campep[p]===false){
-        // A filled swatch, because orange TEXT at 12.5px on a light panel washes out and
-        // the grid would otherwise carry no orange at all.
+        /* A filled swatch, because orange TEXT at 12.5px on a light panel washes
+           out and the grid would otherwise carry no orange at all. */
         svg.appendChild(el('rect',{x:6,y:y+ch/2-5,width:10,height:10,rx:2,fill:'var(--no)'}));
       }
       cells[i].forEach(function(v,j){
