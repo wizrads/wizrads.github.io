@@ -79,9 +79,9 @@ google_fonts: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..14
 .llm-post .legend{display:flex;gap:1.1rem;flex-wrap:wrap;align-items:center;margin:0 0 .9em;
   font-family:"IBM Plex Mono",monospace;font-size:.73rem;color:var(--ink-2)}
 .llm-post .legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:.4em;vertical-align:-1px}
-.llm-post .axlab{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--ink-3)}
-.llm-post .marklab{font-family:"IBM Plex Mono",monospace;font-size:12px;fill:var(--ink);font-variant-numeric:tabular-nums}
-.llm-post .namelab{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:12.5px;fill:var(--ink)}
+.llm-post .axlab{font-family:"IBM Plex Mono",monospace;font-size:12px;fill:var(--ink-3)}
+.llm-post .marklab{font-family:"IBM Plex Mono",monospace;font-size:13px;fill:var(--ink);font-variant-numeric:tabular-nums}
+.llm-post .namelab{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:14px;fill:var(--ink)}
 .llm-post .gridline{stroke:var(--grid);stroke-width:1}
 .llm-post .axis{stroke:var(--rule);stroke-width:1}
 .llm-post .bar{transition:opacity .12s}
@@ -250,16 +250,26 @@ improvise below it, which is roughly what a well-read undergraduate would do.</p
     <p class="figtitle">Master&rsquo;s or doctoral? The models shrug</p>
     <p class="figsub">All fifteen for each phrasing. Rank sits at the left of each row.</p>
     <div class="legend">
-      <span><i style="background:var(--yes)"></i>CAMPEP-accredited</span>
+      <span><i style="background:var(--yes)"></i>Accredited graduate program, any degree</span>
       <span><i style="background:var(--no)"></i>No accredited graduate program</span>
     </div>
     <div id="c-three"></div>
     <figcaption>CAMPEP accredits master&rsquo;s and doctoral programs separately and they are
     genuinely different degrees, so I asked separately. The same three schools hold the top of all
     three lists. Below that the order reshuffles without settling into anything resembling a
-    master&rsquo;s versus doctoral distinction. Columbia appears only for master&rsquo;s. Stanford
-    and WashU appear only for doctoral. Vanderbilt falls from sixth to twelfth. The lists shuffle.
-    They do not discriminate.</figcaption>
+    master&rsquo;s versus doctoral distinction. Only two schools are unique to a single column:
+    Georgia Tech, which the models name only for master&rsquo;s, and MIT, only for doctoral. Every
+    other school turns up in at least two. Vanderbilt swings from sixth for master&rsquo;s to
+    twelfth for doctoral, and Columbia makes the master&rsquo;s list but not the doctoral one. The
+    lists shuffle. They do not discriminate.
+    <br><br>
+    One thing the colours cannot carry: they mark schools holding an accredited graduate program in
+    medical physics at <em>any</em> degree level, because the graduate list is what I checked
+    against. Since CAMPEP accredits master&rsquo;s and doctoral programs separately, a blue bar in
+    the master&rsquo;s column is not a promise that the school runs an accredited master&rsquo;s —
+    and some of the schools the models name here do not offer that degree at all. That is arguably
+    the sharper version of the finding: asked for the best master&rsquo;s programs, the models
+    return departments that have no master&rsquo;s program to rank.</figcaption>
     <details><summary>Show the numbers</summary><div class="scroll" id="t-three"></div></details>
   </figure>
 </section>
@@ -469,7 +479,9 @@ Iowa with the University of Miami.</p>
   /* ---------- 1. leaderboard ---------- */
   (function(){
     var d = D.graduate, n = d.length;
-    var W=820, padL=148, padR=104, padT=26, rowH=30, H=padT + n*rowH + 34;
+    /* Narrower viewBox = bigger everything, since the SVG is scaled to the
+       column: 820 units into ~677px shrank the labels by 18%. */
+    var W=720, padL=152, padR=116, padT=26, rowH=32, H=padT + n*rowH + 34;
     var x0=padL, x1=W-padR, max=1.0;
     var sx=function(v){ return x0 + (v/max)*(x1-x0); };
     var svg = el('svg',{viewBox:'0 0 '+W+' '+H, role:'img',
@@ -511,7 +523,7 @@ Iowa with the University of Miami.</p>
   /* ---------- 2. share by phrasing ---------- */
   (function(){
     var d = D.share, n=d.length;
-    var W=820, padL=132, padR=92, padT=22, rowH=42, H=padT+n*rowH+34;
+    var W=700, padL=150, padR=88, padT=22, rowH=44, H=padT+n*rowH+34;
     var x0=padL, x1=W-padR, max=25;
     var sx=function(v){ return x0 + (v/max)*(x1-x0); };
     var svg = el('svg',{viewBox:'0 0 '+W+' '+H, role:'img',
@@ -547,7 +559,7 @@ Iowa with the University of Miami.</p>
   /* ---------- 3b. schools with no accredited graduate program ---------- */
   (function(){
     var d=D.notelig, n=d.length;
-    var W=860, padL=212, padR=96, padT=22, rowH=30, H=padT+n*rowH+34;
+    var W=740, padL=216, padR=120, padT=22, rowH=32, H=padT+n*rowH+34;
     var x0=padL, x1=W-padR, max=Math.max.apply(null,d.map(function(p){return p.named}));
     var sx=function(v){ return x0+(v/max)*(x1-x0); };
     var svg=el('svg',{viewBox:'0 0 '+W+' '+H, role:'img',
@@ -584,7 +596,7 @@ Iowa with the University of Miami.</p>
   (function(){
     var H0 = D.heat, progs=H0.short, models=H0.models, cells=H0.cells;
     var campep = {}; D.graduate.forEach(function(p){ campep[p.short]=p.campep; });
-    var cw=76, ch=28, padL=150, padT=76, W=padL+models.length*cw+40, H=padT+progs.length*ch+22;
+    var cw=66, ch=30, padL=152, padT=80, W=padL+models.length*cw+52, H=padT+progs.length*ch+22;
     var steps=['var(--seq-0)','var(--seq-1)','var(--seq-2)','var(--seq-3)','var(--seq-4)','var(--seq-5)'];
     function step(v){ if(v===0) return steps[0]; if(v<=2) return steps[1]; if(v<=4) return steps[2];
       if(v<=6) return steps[3]; if(v<=8) return steps[4]; return steps[5]; }
@@ -628,12 +640,11 @@ Iowa with the University of Miami.</p>
   /* ---------- 5. three phrasings side by side ---------- */
   (function(){
     var cols=[{k:'graduate',t:'Graduate'},{k:'masters',t:"Master's"},{k:'doctoral',t:'Doctoral'}];
-    var N=15, cw=250, gap=26, padT=52, rowH=30, padL=4;
+    var N=15, cw=240, gap=22, padT=54, rowH=32, padL=4;
     var W=padL+cols.length*cw+(cols.length-1)*gap, H=padT+N*rowH+18;
-    /* barL is the name gutter: the longest label, UC Berkeley/UCSF, measures
-       107.4 units from x=19, so 126 left it touching the bar. barR shrinks by
-       the same amount so the bars keep their length. */
-    var barL=136, barR=38, max=1.0;
+    /* barL is the name gutter: the longest label, UC Berkeley/UCSF, needs
+       ~120 units from x=19 at the current type size, so the bars start at 148. */
+    var barL=148, barR=34, max=1.0;
     var svg=el('svg',{viewBox:'0 0 '+W+' '+H, role:'img',
       'aria-label':'Top eight schools for each of three phrasings; the same three lead all three lists'});
     cols.forEach(function(c,ci){
