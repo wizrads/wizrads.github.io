@@ -228,9 +228,9 @@ tail. The only question worth asking is what it is made of.</p>
       <span style="color:var(--ink-3)">whisker = 95% interval</span>
     </div>
     <div id="c-board"></div>
-    <figcaption>Scoring is a normalised Borda count. First place earns 10 points, tenth earns 1,
-    eleventh onward earns nothing. A score of 1.00 would mean every model put it first every time.
-    The fraction beside each bar counts how many of the 80 answers named the school at all.</figcaption>
+    <figcaption>First place earns 10 points, tenth earns 1, eleventh onward earns nothing. A score
+    of 1.00 would mean every model put it first every time. The fraction beside each bar counts how
+    many of the 80 answers named the school at all.</figcaption>
     <details><summary>Show the numbers</summary><div class="scroll" id="t-board"></div></details>
   </figure>
 </section>
