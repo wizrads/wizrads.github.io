@@ -55,7 +55,11 @@ google_fonts: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..14
 .llm-post p{margin:0 0 1.1em}
 .llm-post a{color:var(--yes)}
 .llm-post strong{font-weight:600;color:var(--ink)}
-.llm-post .kicker{border-top:2px solid var(--ink);padding-top:.7em;margin-top:4.2em}
+/* rem, not em: this margin used to be 4.2em, which resolves against the h2's
+   own ~26px font and computed to 109px after every chart (more on wide
+   screens, where the heading grows). 2.8rem is ~50px and stable, which
+   matches the 51px gap between two consecutive figures. */
+.llm-post .kicker{border-top:2px solid var(--ink);padding-top:.7em;margin-top:2.8rem}
 .llm-post section{margin-bottom:3em}
 /* The standalone page opened with a big h1; the theme renders the title instead,
    so this only has to clear the theme's own heading. */
