@@ -630,7 +630,10 @@ Iowa with the University of Miami.</p>
     var cols=[{k:'graduate',t:'Graduate'},{k:'masters',t:"Master's"},{k:'doctoral',t:'Doctoral'}];
     var N=15, cw=250, gap=26, padT=52, rowH=30, padL=4;
     var W=padL+cols.length*cw+(cols.length-1)*gap, H=padT+N*rowH+18;
-    var barL=126, barR=48, max=1.0;
+    /* barL is the name gutter: the longest label, UC Berkeley/UCSF, measures
+       107.4 units from x=19, so 126 left it touching the bar. barR shrinks by
+       the same amount so the bars keep their length. */
+    var barL=136, barR=38, max=1.0;
     var svg=el('svg',{viewBox:'0 0 '+W+' '+H, role:'img',
       'aria-label':'Top eight schools for each of three phrasings; the same three lead all three lists'});
     cols.forEach(function(c,ci){
