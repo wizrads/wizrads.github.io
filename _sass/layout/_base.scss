@@ -2,10 +2,9 @@
    BASE ELEMENTS
    ========================================================================== */
 html {
-  /* sticky footer fix */
   position: relative;
   min-height: 100%;
-  
+
   scroll-behavior: smooth;
 }
 
@@ -13,6 +12,19 @@ body {
   /* Set via _themes.scss */
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
+
+  /* Sticky footer. The page is a column at least as tall as the window, so on a
+     short page (/year-archive/, /teaching/) the footer is pushed to the bottom
+     of the viewport instead of stranded up the middle; a long page just flows
+     past it. This is NOT the old position: fixed footer that was removed - see
+     _footer.scss - the footer stays in normal flow in both cases, and nothing
+     measures it at runtime. #main carries the matching flex-grow and an
+     explicit width, because Susy's container gives it auto side margins, and an
+     auto margin on the cross axis stops a flex item stretching. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;  /* excludes mobile browser chrome where supported */
 
   margin: 0;
   /* Reserve exactly what the fixed masthead occupies, so the JS in

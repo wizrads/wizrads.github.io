@@ -200,7 +200,8 @@ into things he led.
 
 `_posts/` has one post, `2026-09-14-ask-eight-llms.md`, served at **`/ask-eight-llms/`** — posts take
 `permalink: /:categories/:title/` from `_config.yml`, and it declares no categories. `_pages/year-archive.html`
-(`/year-archive/`) is the listing page and is the **Blog** nav tab.
+is the listing page and the **Blog** nav tab; it serves at **`/blog/`** and redirects `/year-archive/` there (the
+file keeps its upstream name).
 
 It arrived as a single self-contained 46KB HTML file (five hand-written SVG charts, an inline JSON data block, and
 ~260 lines of vanilla JS) and was moved in without touching the charts. What that required, and what to repeat for
@@ -329,6 +330,17 @@ by accident.
   `body { padding-bottom: 9em }` in `_sass/layout/_base.scss`, a `bumpIt()` function in `_main.js` that re-set the
   body's margin from the footer's measured height on a 250ms `setInterval`, and a `max-width: 768px` rule un-pinning
   it on phones. All four are gone together — if you ever re-pin the footer, they come back as a set.
+- **`_sass/layout/_base.scss` + `_sass/layout/_page.scss` — the sticky footer is flexbox, not `position: fixed`.**
+  `body` is `display: flex; flex-direction: column; min-height: 100vh` (then `100dvh`, which wins where supported and
+  excludes mobile browser chrome), and `#main` is `flex: 1 0 auto`. A short page — `/blog/`, `/teaching/` — therefore
+  pushes the footer to the bottom of the window instead of leaving it stranded mid-screen, and a long page flows past
+  it unchanged. Nothing is measured at runtime, which is the whole point: this is **not** the old fixed footer coming
+  back. Two things make it work and are easy to delete by accident:
+  - `#main` needs its explicit `width: 100%`. Susy's `@include container` gives it `margin-left/right: auto`, and an
+    auto margin on a flex container's *cross* axis suppresses stretching — without the width it collapses to fit its
+    content.
+  - `.masthead` and the brainrot gutter panel are `position: fixed`, so they are not flex items and are unaffected.
+    Anything new added as a direct child of `body` **will** become a flex item.
 Navigation is a plain full page load. Hover-prefetching (instant.page) was added and then **deliberately reverted**
 at Joey's request — do not reintroduce it or a client-side router without asking.
 
