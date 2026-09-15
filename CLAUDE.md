@@ -339,7 +339,12 @@ plus `compress.html`, which minifies output) compose `_includes/` partials — `
 
 **Site-wide data:**
 - `_config.yml` — identity, the `author:` sidebar block, `publication_category` (currently `manuscripts` and
-  `preprints`), analytics/comments providers, and `site_theme`. `url` must stay equal to the custom domain, since
+  `preprints`), analytics/comments providers, and `site_theme`. **Analytics is on**: `provider` is
+  `google-analytics-4` with Joey's GA4 measurement ID, rendered by `_includes/analytics-providers/google-analytics-4.html`
+  through `analytics.html` → `scripts.html`, so it lands on every page built from a layout. A single page opts out with
+  `analytics: false` in its front matter. Two things it does **not** cover, both by design: the `redirect_from` stubs
+  (meta-refresh pages that bounce to a destination which is itself tracked) and `projects/<slug>/index.html`, which is
+  static and carries no site chrome — tracking a demo would also break the no-external-requests house rule above. `url` must stay equal to the custom domain, since
   canonical tags, Open Graph URLs, the feed, and every absolute asset link are built from it.
 - `_data/navigation.yml` — top menu. `_data/authors.yml` — multi-author bylines. `_data/ui-text.yml` — UI strings.
 - The sidebar avatar is `images/profile.jpg`, referenced by `author.avatar` as a bare filename.
